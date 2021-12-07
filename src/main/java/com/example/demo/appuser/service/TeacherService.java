@@ -2,6 +2,7 @@ package com.example.demo.appuser.service;
 
 //import com.example.demo.appuser.AppUserRepository;
 import com.example.demo.appuser.model.Teacher;
+import com.example.demo.appuser.repository.StudentRepository;
 import com.example.demo.appuser.repository.TeacherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ public class TeacherService implements UserDetailsService {
             "user with email %s not found";
 
     private final TeacherRepository teacherRepository;
+    private final StudentRepository studentRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -35,10 +37,15 @@ public class TeacherService implements UserDetailsService {
                 .isPresent();
 
         if (userExists) {
-            // TODO check of attributes are the same and
-            // TODO if email not confirmed send confirmation email.
+            throw new IllegalStateException("email already taken by another teacher account");
+        }
 
-            throw new IllegalStateException("email already taken");
+        userExists = studentRepository
+                .findByEmail(teacher.getEmail())
+                .isPresent();
+
+        if (userExists) {
+            throw new IllegalStateException("email already taken by a student account");
         }
 
 

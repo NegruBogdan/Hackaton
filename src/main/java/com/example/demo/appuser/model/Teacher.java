@@ -4,18 +4,20 @@ import com.example.demo.appuser.model.AppUser;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @NoArgsConstructor
-@Entity
+@Entity(name="teachers")
 public class Teacher extends AppUser {
-//    @ManyToMany
-//    private Collection<Class_> classes;
-    private int classes;
+    @ManyToMany
+    private Collection<Class_> classes;
+//    private int classes;
+
     public Teacher(String firstName,
                    String lastName,
                    String email,
                    String password) {
         super(firstName, lastName, email, password);
-        this.classes = 2;
+        this.classes = null;
     }
 }

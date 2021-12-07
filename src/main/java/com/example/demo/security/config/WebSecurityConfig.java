@@ -2,6 +2,7 @@ package com.example.demo.security.config;
 
 //import com.example.demo.appuser.AppUserService;
 import com.example.demo.appuser.service.StudentService;
+import com.example.demo.appuser.service.TeacherService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final StudentService studentService;
+    private final TeacherService teacherService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -34,15 +36,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
+        auth.authenticationProvider(studentDaoAuthenticationProvider());
+        auth.authenticationProvider(teacherDaoAuthenticationProvider());
     }
 
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
+    public DaoAuthenticationProvider studentDaoAuthenticationProvider() {
         DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(studentService);
+        return provider;
+    }
+
+    @Bean
+    public DaoAuthenticationProvider teacherDaoAuthenticationProvider() {
+        DaoAuthenticationProvider provider =
+                new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(bCryptPasswordEncoder);
+        provider.setUserDetailsService(teacherService);
         return provider;
     }
 }
