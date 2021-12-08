@@ -401,6 +401,12 @@ input[type=checkbox]:not(old):checked + label > span:before {
   .loginhere-link:hover {
     text-decoration: underline; }
 
+.sign-up-link {
+  color: #1da0f2;
+  text-decoration: none; }
+.loginhere-link:hover {
+  text-decoration: underline; }
+
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px white inset; }
 
