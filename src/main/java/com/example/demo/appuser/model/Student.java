@@ -1,17 +1,21 @@
 package com.example.demo.appuser.model;
 
 import com.example.demo.appuser.model.AppUser;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity(name="students")
 public class Student extends AppUser {
 
     @ManyToOne
     private Class_ class_;
-//    private int class_;
 
     public Student(String firstName,
                    String lastName,
@@ -21,4 +25,11 @@ public class Student extends AppUser {
         this.class_ = null;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                super.toString() + ',' +
+                "class_=" + class_ +
+                '}';
+    }
 }

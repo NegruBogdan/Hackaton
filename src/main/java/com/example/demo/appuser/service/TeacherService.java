@@ -1,7 +1,10 @@
 package com.example.demo.appuser.service;
 
 //import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.appuser.model.Class_;
+import com.example.demo.appuser.model.Student;
 import com.example.demo.appuser.model.Teacher;
+import com.example.demo.appuser.repository.ClassRepository;
 import com.example.demo.appuser.repository.StudentRepository;
 import com.example.demo.appuser.repository.TeacherRepository;
 import lombok.AllArgsConstructor;
@@ -20,11 +23,11 @@ public class TeacherService implements UserDetailsService {
 
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
+    private final ClassRepository classRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String email)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return teacherRepository.findByEmail(email)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(
@@ -56,6 +59,23 @@ public class TeacherService implements UserDetailsService {
 
         teacherRepository.save(teacher);
 
-        return "it works";
+        return "Teacher Added:\n" + teacher.toString();
+    }
+
+    public Teacher getTeacherById(Long id) {
+        return teacherRepository.getById(id);
+    }
+
+    public Teacher enrollTeacherToClass(Long teacher_id, Long class_id) throws Exception{
+        Teacher teacher = teacherRepository.getById(teacher_id);
+        Class_ class_ = classRepository.getById(class_id);
+        if (!teacher.getClasses().contains(class_)) {
+            teacher.getClasses().add(class_);
+            teacherRepository.save(teacher);
+            return teacher;
+        } else {
+            throw new Exception("Teacher is already enrolled to this class.");
+        }
+
     }
 }

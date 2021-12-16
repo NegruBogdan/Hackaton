@@ -1,15 +1,20 @@
 package com.example.demo.appuser.service;
 
 //import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.appuser.model.Class_;
 import com.example.demo.appuser.model.Student;
+import com.example.demo.appuser.repository.ClassRepository;
 import com.example.demo.appuser.repository.StudentRepository;
 import com.example.demo.appuser.repository.TeacherRepository;
 import lombok.AllArgsConstructor;
+import org.postgresql.util.PSQLException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 @AllArgsConstructor
@@ -20,6 +25,7 @@ public class StudentService implements UserDetailsService {
 
     private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
+    private final ClassRepository classRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -55,6 +61,18 @@ public class StudentService implements UserDetailsService {
 
         studentRepository.save(student);
 
-        return "it works";
+        return "Student Added:\n" + student.toString();
+    }
+
+    public Student getStudentById(Long id) {
+        return studentRepository.getById(id);
+    }
+
+    public Student enrollStudentToClass(Long student_id, Long class_id) {
+        Student student = studentRepository.getById(student_id);
+        Class_ class_ = classRepository.getById(class_id);
+        student.setClass_(class_);
+        studentRepository.save(student);
+        return student;
     }
 }

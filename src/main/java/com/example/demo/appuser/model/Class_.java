@@ -1,17 +1,21 @@
 package com.example.demo.appuser.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import javax.persistence.*;
 import java.util.Collection;
 
+@NoArgsConstructor
 @Entity(name="classes")
+@ToString
 public class Class_ {
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
-//    @OneToMany
-//    private Collection<Student> students;
-//    @ManyToMany
-//    private Collection<Teacher> teachers;
+
+    public Class_(String name) {
+        this.name = name;
+    }
 }
