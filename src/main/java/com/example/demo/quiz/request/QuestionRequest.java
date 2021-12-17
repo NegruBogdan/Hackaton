@@ -1,7 +1,5 @@
 package com.example.demo.quiz.request;
 
-
-import com.example.demo.quiz.model.Quiz;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

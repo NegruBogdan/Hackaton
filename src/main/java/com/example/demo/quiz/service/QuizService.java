@@ -4,7 +4,9 @@ import com.example.demo.appuser.model.Student;
 import com.example.demo.appuser.model.Teacher;
 import com.example.demo.appuser.service.ClassService;
 import com.example.demo.appuser.service.TeacherService;
+import com.example.demo.quiz.model.Question;
 import com.example.demo.quiz.model.Quiz;
+import com.example.demo.quiz.repository.QuestionRepository;
 import com.example.demo.quiz.repository.QuizRepository;
 import com.example.demo.quiz.request.QuizRequest;
 import lombok.AllArgsConstructor;
@@ -16,6 +18,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class QuizService {
     private final QuizRepository quizRepository;
+    private final QuestionRepository questionRepository;
     private final TeacherService teacherService;
     private final ClassService classService;
 
@@ -30,5 +33,9 @@ public class QuizService {
 
     public Quiz getQuizById (Long id) {
         return quizRepository.getById(id);
+    }
+
+    public Collection<Question> getQuestionsFromQuiz(Long id) {
+        return questionRepository.getQuestionFromQuiz(quizRepository.getById(id));
     }
 }
