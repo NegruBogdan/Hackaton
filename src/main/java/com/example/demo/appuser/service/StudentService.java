@@ -7,7 +7,6 @@ import com.example.demo.appuser.repository.ClassRepository;
 import com.example.demo.appuser.repository.StudentRepository;
 import com.example.demo.appuser.repository.TeacherRepository;
 import lombok.AllArgsConstructor;
-import org.postgresql.util.PSQLException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
