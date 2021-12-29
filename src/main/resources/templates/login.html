@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login</title>
 
-    <link rel="stylesheet" href="../src/static/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../src/static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+
 </head>
 <body>
 
@@ -17,7 +19,7 @@
     <div class="container">
         <div class="sign-up-content">
             <h2 class="form-title">LOGIN</h2>
-            <form method="GET" class="loginhere">
+            <form method="POST" class="loginhere" th:action="@{/login}">
                 <div class="form-textbox">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" />
@@ -40,7 +42,7 @@
 
 </div>
 
-<script src="../src/static/vendor/jquery/jquery.min.js"></script>
-<script src="../src/static/js/main.js"></script>
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="../static/js/main.js"></script>
 </body>
 </html>

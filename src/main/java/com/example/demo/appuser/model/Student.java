@@ -25,6 +25,9 @@ public class Student extends AppUser {
         this.class_ = null;
     }
 
+    public Student(String email, String password) {
+    }
+
     @Override
     public String toString() {
         return "Student{" +

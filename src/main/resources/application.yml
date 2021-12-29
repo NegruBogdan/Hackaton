@@ -4,9 +4,11 @@ server:
     include-binding-errors: always
 
 spring:
+#  thymeleaf:
+#      prefix: classpath:/templates/
   datasource:
-    password: 123456
-    url: jdbc:postgresql://localhost:5432/users
+    password: 2116235piti
+    url: jdbc:postgresql://localhost:5433/users
     username: postgres
   jpa:
     hibernate:

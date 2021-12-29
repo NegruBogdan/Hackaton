@@ -1,5 +1,6 @@
 package com.example.demo.registration;
 
+import com.example.demo.appuser.model.AppUserInterface;
 import com.example.demo.appuser.model.AppUserRole;
 import com.example.demo.appuser.model.Student;
 import com.example.demo.appuser.model.Teacher;
@@ -45,4 +46,6 @@ public class RegistrationService {
             );
         }
     }
+
+
 }

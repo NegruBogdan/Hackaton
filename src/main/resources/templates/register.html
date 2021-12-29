@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sign Up</title>
 
-    <link rel="stylesheet" href="../src/static/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../src/static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 
@@ -16,7 +17,7 @@
 
     <div class="container">
         <div class="sign-up-content">
-            <form method="POST" class="signup-form">
+            <form method="POST" class="signup-form" th:action="@{/register}">
                 <h2 class="form-title">SIGN UP</h2>
                 <div class="form-radio">
                     <input type="radio" name="member_level" value="newbie" id="newbie" checked="checked" />
@@ -60,7 +61,7 @@
 
 </div>
 
-<script src="../src/static/vendor/jquery/jquery.min.js"></script>
-<script src="../src/static/js/main.js"></script>
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="../static/js/main.js"></script>
 </body>
 </html>
