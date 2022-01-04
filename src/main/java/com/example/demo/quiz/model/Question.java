@@ -3,9 +3,9 @@ package com.example.demo.quiz.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @NoArgsConstructor
 @Setter
@@ -17,36 +17,14 @@ public class Question {
     private Long id;
     @ManyToOne
     private Quiz quiz;
-    @OneToOne
-    private Answer correctAnswer;
     private String questionText;
     private int score;
+    @OneToMany
+    private Collection<Answer> answers;
 
-    public Question(Quiz quiz, String questionText, int score) {
+    public Question(Quiz quiz,String questionText,int score){
         this.quiz = quiz;
-        this.correctAnswer = null;
         this.questionText = questionText;
         this.score = score;
-    }
-
-    @Override
-    public String toString() {
-        if (correctAnswer != null) {
-            return "Question{" +
-                    "id=" + id +
-                    ", quiz=" + quiz +
-                    ", correctAnswerId=" + correctAnswer.getId().toString() +
-                    ", questionText='" + questionText + '\'' +
-                    ", score=" + score +
-                    '}';
-        } else {
-            return "Question{" +
-                    "id=" + id +
-                    ", quiz=" + quiz +
-                    ", correctAnswer=null" +
-                    ", questionText='" + questionText + '\'' +
-                    ", score=" + score +
-                    '}';
-        }
     }
 }

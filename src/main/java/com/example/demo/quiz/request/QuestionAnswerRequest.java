@@ -1,6 +1,5 @@
 package com.example.demo.quiz.request;
 
-import com.example.demo.appuser.model.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,8 +11,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class QuizRequest {
-    private final Long authorId;
-    private final String name;
-    private final Long classId;
+public class QuestionAnswerRequest {
+    private final String text;
+    private final boolean isTrue;
 }

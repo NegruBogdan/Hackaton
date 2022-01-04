@@ -7,7 +7,7 @@ spring:
 #  thymeleaf:
 #      prefix: classpath:/templates/
   datasource:
-    password: 2116235piti
+    password: bobo123
     url: jdbc:postgresql://localhost:5433/users
     username: postgres
   jpa:
