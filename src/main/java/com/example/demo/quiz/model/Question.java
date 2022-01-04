@@ -20,7 +20,7 @@ public class Question {
     private String questionText;
     private int score;
     @OneToMany
-    private Collection<Answer> answers;
+    private Collection<QuestionAnswer> answers;
 
     public Question(Quiz quiz,String questionText,int score){
         this.quiz = quiz;
