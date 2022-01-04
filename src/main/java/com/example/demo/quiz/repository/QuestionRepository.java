@@ -10,8 +10,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Collection;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    Question getById(Long id);
 
     @Query("SELECT q FROM questions q WHERE q.quiz=?1")
     Collection<Question> getQuestionFromQuiz(Quiz quiz);
+
+    @Query(value = "SELECT q.score from questions q where q.id = 1?",nativeQuery = true)
+    Long getScore(Long id);
+
 }
