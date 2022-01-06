@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{css/register.css}">
 </head>
 <body>
 
@@ -17,8 +17,8 @@
 
     <div class="container">
         <div class="sign-up-content">
-            <form th:action="@{/register}" th:object="${user}" method="post" class="signup-form" >
-                <h2 class="form-title">SIGN UP</h2>
+            <form method="post" class="signup-form" th:action="@{/register}" th:object="${user}"}>
+                <h1 class="form-title">SIGN UP</h1>
                 <div class="form-radio">
                     <input type="radio" th:field="*{appUserRole}" value="STUDENT" id="newbie" checked="checked"/>
                     <label for="newbie">Student</label>
@@ -53,7 +53,7 @@
             </form>
 
             <p class="loginhere">
-                Already have an account ?<a th:href="@{/login}" class="loginhere-link"> Log in</a>
+                Already have an account ?<a th:href="@{/login}" class="link"> Log in</a>
             </p>
         </div>
     </div>

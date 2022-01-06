@@ -8,8 +8,8 @@
     <title>Login</title>
 
     <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{css/style.css}">
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+    <link rel="stylesheet" th:href="@{css/login.css}">
 
 </head>
 <body>
@@ -19,7 +19,7 @@
     <div class="container">
         <div class="sign-up-content">
             <h2 class="form-title">LOGIN</h2>
-            <form th:action="@{/login}" method="post" class="loginhere" >
+            <form th:action="@{/login}" method="post" class="loginhere">
                 <div th:if="${param.error}">
                     <div class="alert alert-danger">Invalid username or password.</div>
                 </div>
@@ -32,15 +32,16 @@
                 </div>&nbsp;
                 <div class="form-textbox">
                     <label for="pass">Password</label>
-                    <input type="password" name="password" id="pass" />
+                    <input class="text" type="password" name="password" id="pass" />
                 </div>
+                &nbsp;
                 <div class="form-textbox">
                     <input type="submit" id="submit" class="submit"/>
                 </div>
             </form>
 
             <p class="loginhere">
-                Do not have an account ?<a th:href="@{/register}" class="sign-up-link"> Sing up</a>
+                Do not have an account ?<a th:href="@{/register}" class="link">Sign Up</a>
             </p>
         </div>
     </div>
