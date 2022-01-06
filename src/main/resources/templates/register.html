@@ -8,8 +8,7 @@
     <title>Sign Up</title>
 
     <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/register.css">
 </head>
 <body>
 
@@ -18,14 +17,8 @@
     <div class="container">
         <div class="sign-up-content">
             <form method="POST" class="signup-form" th:action="@{/register}">
-                <h2 class="form-title">SIGN UP</h2>
+                <h1 class="form-title">SIGN UP</h1>
                 <div class="form-radio">
-                    <input type="radio" name="member_level" value="newbie" id="newbie" checked="checked" />
-                    <label for="newbie">Student</label>
-
-                    <input type="radio" name="member_level" value="average" id="average" />
-                    <label for="average">Teacher</label>
-
                 </div>
 
                 <div class="form-textbox">
@@ -54,7 +47,7 @@
             </form>
 
             <p class="loginhere">
-                Already have an account ?<a href="login.html" class="loginhere-link"> Log in</a>
+                Already have an account ?<a href="login.html" class="link"> Log in</a>
             </p>
         </div>
     </div>
