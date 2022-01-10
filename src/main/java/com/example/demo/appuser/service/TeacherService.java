@@ -51,7 +51,6 @@ public class TeacherService implements UserDetailsService {
             throw new IllegalStateException("email already taken by a student account");
         }
 
-
         String encodedPassword = bCryptPasswordEncoder
                 .encode(teacher.getPassword());
 
@@ -60,6 +59,7 @@ public class TeacherService implements UserDetailsService {
         teacherRepository.save(teacher);
 
         return "Teacher Added:\n" + teacher.toString();
+
     }
 
     public Teacher getTeacherById(Long id) {

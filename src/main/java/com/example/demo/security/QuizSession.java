@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class QuizSession {
-
     private Long id;
 
     public Long getId() {

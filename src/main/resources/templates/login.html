@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" th:href="@{css/style.css}">
 
 </head>
 <body>
@@ -19,7 +19,7 @@
     <div class="container">
         <div class="sign-up-content">
             <h2 class="form-title">LOGIN</h2>
-            <form method="POST" class="loginhere" th:action="@{/login}">
+            <form method="POST" class="loginhere" th:action="@{login}">
                 <div class="form-textbox">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" />
@@ -28,14 +28,14 @@
                     <label for="pass">Password</label>
                     <input type="password" name="pass" id="pass" />
                 </div>
-                &nbsp;
+                <div id="passwordHelp" th:text="${errLogin}"></div>
                 <div class="form-textbox">
-                    <a href="home.html" id="submit" class="submit">Login</a>
+                    <input type="submit" id="submit" class="submit"></input>
                 </div>
             </form>
 
             <p class="loginhere">
-                Do not have an account ?<a href="register.html" class="sign-up-link"> Sing up</a>
+                Do not have an account ?<a href="register" class="sign-up-link"> Sing up</a>
             </p>
         </div>
     </div>

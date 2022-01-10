@@ -20,22 +20,22 @@
             <form method="POST" class="signup-form" th:action="@{/register}">
                 <h2 class="form-title">SIGN UP</h2>
                 <div class="form-radio">
-                    <input type="radio" name="member_level" value="newbie" id="newbie" checked="checked" />
+                    <input type="radio" name="appUserRole" value="STUDENT" id="newbie" checked="checked"/>
                     <label for="newbie">Student</label>
 
-                    <input type="radio" name="member_level" value="average" id="average" />
+                    <input type="radio" name="appUserRole" value="TEACHER" id="average"/>
                     <label for="average">Teacher</label>
 
                 </div>
 
                 <div class="form-textbox">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name" />
+                    <input type="text" name="firstName" id="name" />
                 </div>
                 &nbsp;
                 <div class="form-textbox">
                     <label for="surname">Surname</label>
-                    <input type="text" name="name" id="surname" />
+                    <input type="text" name="lastName" id="surname" />
                 </div>
                 &nbsp;
                 <div class="form-textbox">
@@ -49,7 +49,7 @@
                 </div>
                 &nbsp;
                 <div class="form-textbox">
-                    <a href="home.html" id="submit" class="submit">Create account</a>
+                    <input type="submit" id="submit" class="submit">Create account</input>
                 </div>
             </form>
 

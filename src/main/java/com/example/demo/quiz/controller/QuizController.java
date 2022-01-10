@@ -36,7 +36,7 @@ public class QuizController {
     private final QuestionService questionService;
     private final QuizService quizService;
     private final QuestionAnswerService questionAnswerService;
-    private Long scor;
+    //private Long scor;
 
     @Autowired
     QuizSession quizSession;
@@ -116,9 +116,6 @@ public class QuizController {
             return new ModelAndView("redirect:/quiz");
         }
         return loginView;
-
-
-
     }
 
     @PostMapping("/question/{id}")

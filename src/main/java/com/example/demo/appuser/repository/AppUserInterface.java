@@ -1,5 +1,6 @@
-package com.example.demo.appuser.model;
+package com.example.demo.appuser.repository;
 
+import com.example.demo.appuser.model.AppUser;
 import com.example.demo.login.LoginRequest;
 import org.springframework.stereotype.Component;
 

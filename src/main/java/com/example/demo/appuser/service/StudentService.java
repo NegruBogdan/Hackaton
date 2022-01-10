@@ -62,6 +62,7 @@ public class StudentService implements UserDetailsService {
 
         return "Student Added:\n" + student.toString();
     }
+
 //    public String loginStudent(Student student) {
 //        boolean userExists = studentRepository
 //                .findByEmail(student.getEmail())
@@ -80,9 +81,6 @@ public class StudentService implements UserDetailsService {
 //
 //        return "login with success";
 //    }
-
-
-
 
     public Student getStudentById(Long id) {
         return studentRepository.getById(id);

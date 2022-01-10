@@ -11,9 +11,9 @@ public class RegistrationController {
 
     private final RegistrationService registrationService;
 
-    @GetMapping("/register")
+    @GetMapping
     public ModelAndView registerPage() {
-        return new ModelAndView("register.html");
+        return new ModelAndView("register");
     }
 
     @PostMapping
