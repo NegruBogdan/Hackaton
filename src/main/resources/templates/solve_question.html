@@ -16,15 +16,15 @@
 <body>
 
 <div class="main">
-    <div th:text="${quiz.name}"></div>
+    <div th:text="${quizSession.quiz.name}"></div>
 
     <br/>
-    <a th:if="${previousQuestionId != -1}" th:href="@{/quizzes/__${quiz.id}__/question/__${previousQuestionId}__}">
+    <a th:if="${previousQuestionId != -1}" th:href="@{/quizzes/__${quizSession.id}__/question/__${previousQuestionId}__}">
             Previous Question
     </a>
 
     <div th:text="${question.getQuestionText()}"></div>
-    <form th:if="${nextQuestionId != -1}" th:action="@{/quizzes/__${quiz.id}__/question/__${nextQuestionId}__}" method="post">
+    <form th:action="@{/quizzes/__${quizSession.id}__/question/__${question.getId()}__}" method="post">
         <div th:each="answer, iStat: ${question.answers}" class="form-radio">
             <label th:for="isAnswerCorrect + ${iStat.index}" th:text="${answer.getText()}"></label>
             <input type="radio" th:name="isAnswerCorrect + ${iStat.index}" value="true" id="newbie"/>
@@ -33,16 +33,19 @@
             <input type="radio" th:name="isAnswerCorrect + ${iStat.index}" value="false" id="average" checked="checked"/>
             <label for="average">Incorrect</label>
         </div>
-        <div class="form-textbox">
+        <div th:if="${nextQuestionId != -1}" class="form-textbox">
             <input type="submit" id="submit_next" value="Next Question">
         </div>
-    </form>
-
-    <form th:if="${nextQuestionId == -1}" th:action="@{/quizzes/__${quiz.id}__/submitQuiz}" method="post">
-        <div class="form-textbox">
+        <div th:if="${nextQuestionId == -1}" class="form-textbox">
             <input type="submit" id="submit_quiz" value="Submit Quiz">
         </div>
     </form>
+
+    <!--form th:if="${nextQuestionId == -1}" th:action="@{/quizzes/__${quiz.id}__/submitQuiz}" method="post">
+        <div class="form-textbox">
+            <input type="submit" id="submit_quiz" value="Submit Quiz">
+        </div>
+    </form-->
 </div>
 
 <script src="../static/vendor/jquery/jquery.min.js"></script>

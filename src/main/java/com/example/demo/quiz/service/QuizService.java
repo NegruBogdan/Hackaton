@@ -8,10 +8,12 @@ import com.example.demo.appuser.service.TeacherService;
 import com.example.demo.quiz.model.Question;
 import com.example.demo.quiz.model.Quiz;
 import com.example.demo.quiz.model.QuizSession;
+import com.example.demo.quiz.model.StudentAnswer;
 import com.example.demo.quiz.repository.QuestionRepository;
 import com.example.demo.quiz.repository.QuizRepository;
 import com.example.demo.quiz.repository.QuizSessionRepository;
 import com.example.demo.quiz.request.QuizRequest;
+import com.example.demo.quiz.request.StudentAnswerRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +59,10 @@ public class QuizService {
         return quizSessionRepository.getById(id);
     }
 
+    public int calculateScore(QuizSession quizSession) {
+        return 0;
+    }
+
     public Collection<Question> getQuestionsFromQuiz(Long id) {
         return questionRepository.getQuestionFromQuiz(quizRepository.getById(id));
     }
@@ -68,6 +74,7 @@ public class QuizService {
     public Collection<Quiz> getQuizzesByStudentId(Long studentId) {
         return quizRepository.getQuizzesByStudent(studentService.getStudentById(studentId));
     }
+
 
 
 

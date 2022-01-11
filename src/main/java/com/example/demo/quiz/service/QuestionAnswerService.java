@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 public class QuestionAnswerService {
     QuestionAnswerRepository answerRepository;
 
-    public QuestionAnswer addAnswer(Question question, String answerText,boolean isTrue){
-        QuestionAnswer answer = new QuestionAnswer(question, answerText,isTrue);
+    public QuestionAnswer addAnswer(Question question, String answerText, boolean isTrue){
+        QuestionAnswer answer = new QuestionAnswer(question, answerText, isTrue);
         answerRepository.save(answer);
         return answer;
     }
 
     public boolean CheckAnswer(Long choice){
         QuestionAnswer answer = answerRepository.getQuestionAnswerById(choice);
-        if (answer.isTrue()) {
+        if (answer.isCorrect()) {
             return true;
 
         }

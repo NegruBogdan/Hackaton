@@ -22,6 +22,7 @@ public class StudentAnswer {
 //    private Question question;
     @ManyToOne
     private QuizSession quizSession;
+    private boolean isCorrect;
 
     public StudentAnswer(QuestionAnswer choice, QuizSession quizSession) {
         this.choice = choice;

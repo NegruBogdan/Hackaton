@@ -7,9 +7,11 @@ import com.example.demo.quiz.model.QuestionAnswer;
 import com.example.demo.quiz.model.Quiz;
 import com.example.demo.quiz.request.QuestionRequest;
 import com.example.demo.quiz.request.QuizRequest;
+import com.example.demo.quiz.request.StudentAnswerRequest;
 import com.example.demo.quiz.service.QuestionAnswerService;
 import com.example.demo.quiz.service.QuestionService;
 import com.example.demo.quiz.service.QuizService;
+import com.example.demo.quiz.service.StudentAnswerService;
 import com.example.demo.security.QuestionAnswerSession;
 import com.example.demo.security.QuestionSession;
 import com.example.demo.quiz.model.QuizSession;
@@ -36,6 +38,7 @@ public class QuizController {
     private final QuestionService questionService;
     private final QuizService quizService;
     private final QuestionAnswerService questionAnswerService;
+    private final StudentAnswerService studentAnswerService;
     // private Long scor;
 
 //    @Autowired
@@ -139,14 +142,36 @@ public class QuizController {
         Collection<QuestionAnswer> answers = questionService.getAnswersFromQuestion(question_id);
         question.setAnswers(answers);
         model.addAttribute("question", question);
-        model.addAttribute("quiz", quiz);
+        model.addAttribute("quizSession", quizSession);
         return new ModelAndView("solve_question");
     }
 
     @PostMapping(value="{quizSession_id}/question/{question_id}")
     public ModelAndView sendQuestionAnswer(@PathVariable long quizSession_id, @PathVariable long question_id,
-                                           @ModelAttribute QuestionRequest request, Model model) {
-        return new ModelAndView("solve_question");
+                                           @ModelAttribute StudentAnswerRequest request, Model model) {
+        studentAnswerService.addStudentAnswer(request);
+        //TO DO
+        QuizSession quizSession = quizService.getQuizSessionById(quizSession_id);
+        Quiz quiz = quizSession.getQuiz();
+        Collection<Question> questions = quizService.getQuestionsFromQuiz(quiz.getId());
+        ArrayList<Long> questionIds = new ArrayList<>();
+        questions.forEach(question -> {
+            questionIds.add(question.getId());
+        });
+        int pos = questionIds.indexOf(question_id);
+        if (pos < questionIds.size() - 1) {
+            return new ModelAndView("redirect:/quizzes/" + quizSession_id + "/question/" + questionIds.get(pos + 1));
+        } else {
+            return new ModelAndView("redirect:/quizzes/session/" + quizSession_id);
+        }
+    }
+
+    @GetMapping(value="/session/{quizSession_id}")
+    public ModelAndView submitQuiz(@PathVariable long quizSession_id, Model model) {
+        QuizSession quizSession = quizService.getQuizSessionById(quizSession_id);
+        model.addAttribute("quizSession", quizSession);
+        model.addAttribute("score", quizService.calculateScore(quizSession));
+        return new ModelAndView("results");
     }
 
     @GetMapping(value="{id}/questions")

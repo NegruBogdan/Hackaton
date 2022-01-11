@@ -15,12 +15,12 @@ public class QuestionAnswer {
     @ManyToOne
     private Question question;
     private String text;
-    private boolean isTrue;
+    private boolean isCorrect;
 
 
-    public QuestionAnswer(Question question,String answerText, boolean isTrue){
+    public QuestionAnswer(Question question,String answerText, boolean isCorrect){
         this.question = question;
         this.text = answerText;
-        this.isTrue = isTrue;
+        this.isCorrect = isCorrect;
     }
 }
