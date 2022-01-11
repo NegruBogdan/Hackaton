@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Setter
 @Entity(name="students")
 public class Student extends AppUser {
-
     @ManyToOne
     private Class_ class_;
 

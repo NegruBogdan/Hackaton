@@ -1,7 +1,6 @@
 package com.example.demo.appuser.service;
 
 import com.example.demo.appuser.model.AppUser;
-import com.example.demo.appuser.repository.AppUserInterface;
 import com.example.demo.appuser.repository.StudentRepository;
 import com.example.demo.appuser.repository.TeacherRepository;
 import org.springframework.stereotype.Service;

@@ -19,23 +19,29 @@
     <div class="container">
         <div class="sign-up-content">
             <h2 class="form-title">LOGIN</h2>
-            <form method="POST" class="loginhere" th:action="@{login}">
+            <form th:action="@{/login}" method="post" class="loginhere" >
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">Invalid username or password.</div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-info">You have been logged out.</div>
+                </div>
                 <div class="form-textbox">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" />
                 </div>&nbsp;
                 <div class="form-textbox">
                     <label for="pass">Password</label>
-                    <input type="password" name="pass" id="pass" />
+                    <input type="password" name="password" id="pass" />
                 </div>
                 <div id="passwordHelp" th:text="${errLogin}"></div>
                 <div class="form-textbox">
-                    <input type="submit" id="submit" class="submit"></input>
+                    <input type="submit" id="submit" class="submit"/>
                 </div>
             </form>
 
             <p class="loginhere">
-                Do not have an account ?<a href="register" class="sign-up-link"> Sing up</a>
+                Do not have an account ?<a th:href="@{/register}" class="sign-up-link"> Sing up</a>
             </p>
         </div>
     </div>

@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" th:href="@{css/style.css}">
 </head>
 <body>
 
@@ -17,44 +17,44 @@
 
     <div class="container">
         <div class="sign-up-content">
-            <form method="POST" class="signup-form" th:action="@{/register}">
+            <form th:action="@{/register}" th:object="${user}" method="post" class="signup-form" >
                 <h2 class="form-title">SIGN UP</h2>
                 <div class="form-radio">
-                    <input type="radio" name="appUserRole" value="STUDENT" id="newbie" checked="checked"/>
+                    <input type="radio" th:field="*{appUserRole}" value="STUDENT" id="newbie" checked="checked"/>
                     <label for="newbie">Student</label>
 
-                    <input type="radio" name="appUserRole" value="TEACHER" id="average"/>
+                    <input type="radio" th:field="*{appUserRole}" value="TEACHER" id="average"/>
                     <label for="average">Teacher</label>
 
                 </div>
 
                 <div class="form-textbox">
                     <label for="name">Name</label>
-                    <input type="text" name="firstName" id="name" />
+                    <input type="text" th:field="*{firstName}" id="name" />
                 </div>
                 &nbsp;
                 <div class="form-textbox">
                     <label for="surname">Surname</label>
-                    <input type="text" name="lastName" id="surname" />
+                    <input type="text" th:field="*{lastName}" id="surname" />
                 </div>
                 &nbsp;
                 <div class="form-textbox">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" />
+                    <input type="email" th:field="*{email}" id="email" />
                 </div>
                 &nbsp;
                 <div class="form-textbox">
                     <label for="pass">Password</label>
-                    <input type="password" name="pass" id="pass" />
+                    <input type="password" th:field="*{password}" id="pass" />
                 </div>
                 &nbsp;
                 <div class="form-textbox">
-                    <input type="submit" id="submit" class="submit">Create account</input>
+                    <input type="submit" id="submit" class="submit"></input>
                 </div>
             </form>
 
             <p class="loginhere">
-                Already have an account ?<a href="login.html" class="loginhere-link"> Log in</a>
+                Already have an account ?<a th:href="@{/login}" class="loginhere-link"> Log in</a>
             </p>
         </div>
     </div>

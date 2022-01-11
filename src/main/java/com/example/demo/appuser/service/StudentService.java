@@ -60,7 +60,8 @@ public class StudentService implements UserDetailsService {
 
         studentRepository.save(student);
 
-        return "Student Added:\n" + student.toString();
+        //return "Student Added:\n" + student.toString();
+        return "login";
     }
 
 //    public String loginStudent(Student student) {

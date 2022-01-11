@@ -13,12 +13,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
-
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final StudentService studentService;
@@ -28,15 +28,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest()
-                .authenticated().and()
+        http.authorizeRequests()
+                .antMatchers("/home").authenticated()
+                .anyRequest().permitAll()
+                .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll();
+                .usernameParameter("email")
+                .defaultSuccessUrl("/")
+                .permitAll()
+                .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout").permitAll();
+
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/**").permitAll()
+//                .anyRequest()
+//                .authenticated().and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .permitAll();
     }
 
     @Override

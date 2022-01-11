@@ -58,7 +58,8 @@ public class TeacherService implements UserDetailsService {
 
         teacherRepository.save(teacher);
 
-        return "Teacher Added:\n" + teacher.toString();
+        //return "Teacher Added:\n" + teacher.toString();
+        return "login";
 
     }
 

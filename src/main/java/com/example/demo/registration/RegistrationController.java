@@ -1,10 +1,13 @@
 package com.example.demo.registration;
 
+import com.example.demo.appuser.model.AppUserRole;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 @RequestMapping(path = "register")
 @AllArgsConstructor
 public class RegistrationController {
@@ -12,7 +15,8 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @GetMapping
-    public ModelAndView registerPage() {
+    public ModelAndView registerPage(Model model) {
+        model.addAttribute("user", new RegistrationRequest("", "", "", "", AppUserRole.STUDENT));
         return new ModelAndView("register");
     }
 
