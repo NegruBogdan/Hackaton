@@ -75,7 +75,12 @@
             <input type="number" name="score" id="score" />
         </div>
         <div class="form-textbox">
-            <input type="submit" id="submit" class="submit"/>
+            <input type="submit" id="submit_question" value="Add Question">
+        </div>
+    </form>
+    <form  th:action="@{/quizzes/__${quiz.id}__/publishQuiz}" method="post">
+        <div class="form-textbox">
+            <input type="submit" id="submit_quiz" value="Publish Quiz">
         </div>
     </form>
     <br/>

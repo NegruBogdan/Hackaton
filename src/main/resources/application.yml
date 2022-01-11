@@ -12,7 +12,7 @@ spring:
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: create-drop # validate
+      ddl-auto: validate # create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

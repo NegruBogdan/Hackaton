@@ -18,8 +18,13 @@ public class StudentAnswer {
     private Long id;
     @ManyToOne
     private QuestionAnswer choice;
-    @ManyToOne
-    private Question question;
+//    @ManyToOne
+//    private Question question;
     @ManyToOne
     private QuizSession quizSession;
+
+    public StudentAnswer(QuestionAnswer choice, QuizSession quizSession) {
+        this.choice = choice;
+        this.quizSession = quizSession;
+    }
 }

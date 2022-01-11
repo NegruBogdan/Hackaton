@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+
+    <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{css/style.css}">
+</head>
+<body>
+
+<div class="main">
+    <div th:text="${quiz.name}"></div>
+
+    <br/>
+    <a th:if="${previousQuestionId != -1}" th:href="@{/quizzes/__${quiz.id}__/question/__${previousQuestionId}__}">
+            Previous Question
+    </a>
+
+    <div th:text="${question.getQuestionText()}"></div>
+    <form th:if="${nextQuestionId != -1}" th:action="@{/quizzes/__${quiz.id}__/question/__${nextQuestionId}__}" method="post">
+        <div th:each="answer, iStat: ${question.answers}" class="form-radio">
+            <label th:for="isAnswerCorrect + ${iStat.index}" th:text="${answer.getText()}"></label>
+            <input type="radio" th:name="isAnswerCorrect + ${iStat.index}" value="true" id="newbie"/>
+            <label for="newbie">Correct</label>
+
+            <input type="radio" th:name="isAnswerCorrect + ${iStat.index}" value="false" id="average" checked="checked"/>
+            <label for="average">Incorrect</label>
+        </div>
+        <div class="form-textbox">
+            <input type="submit" id="submit_next" value="Next Question">
+        </div>
+    </form>
+
+    <form th:if="${nextQuestionId == -1}" th:action="@{/quizzes/__${quiz.id}__/submitQuiz}" method="post">
+        <div class="form-textbox">
+            <input type="submit" id="submit_quiz" value="Submit Quiz">
+        </div>
+    </form>
+</div>
+
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="../static/js/main.js"></script>
+</body>
+</html>

@@ -30,4 +30,5 @@ public class ClassController {
             return "Something wrong happened" + exception.toString();
         }
     }
+
 }

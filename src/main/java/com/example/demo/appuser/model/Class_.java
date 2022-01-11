@@ -1,5 +1,6 @@
 package com.example.demo.appuser.model;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -8,6 +9,7 @@ import java.util.Collection;
 
 @NoArgsConstructor
 @Entity(name="classes")
+@Getter
 @ToString
 public class Class_ {
     @Id

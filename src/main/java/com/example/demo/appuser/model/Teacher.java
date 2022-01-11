@@ -36,7 +36,7 @@ public class Teacher extends AppUser {
         } else {
             return "Teacher{" +
                     super.toString() + ',' +
-                    "classes=" + classes.toString() +
+                    //"classes=" + classes.toString() +
                     '}';
         }
 

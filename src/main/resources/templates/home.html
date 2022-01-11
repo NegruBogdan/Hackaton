@@ -40,22 +40,35 @@
     </div>
 
     <div sec:authorize="isAuthenticated()">
-        <form th:action="@{/quizzes/add}" method="post">
-            <div class="hidden">
-                <input type="number" name="authorId" sec:value="principal.id" id="author_id" class="hidden"/>
-            </div>&nbsp;
+        <form th:if="${role == 'teacher'}" th:action="@{/quizzes/add}" method="post">
+            <input type="hidden" name="authorId" th:value="${user.getId()}" id="author_id" class="hidden"/>
             <div class="form-textbox">
                 <label for="quiz_name">Name</label>
                 <input type="text" name="name" id="quiz_name" />
             </div>&nbsp;
             <div class="form-textbox">
                 <label for="class_id">Class</label>
-                <input type="number" name="classId" id="class_id" />
+                <select name="classId"  id="class_id">
+                    <div th:each="class: ${classes}">
+                        <option th:value="${class.getId()}" th:text="${class.getName()}"></option>
+                    </div>
+                </select>
             </div>
             <div class="form-textbox">
                 <input type="submit" id="submit" class="submit"/>
             </div>
         </form>
+        <div>Your quizzes: </div>
+        <div th:each="quiz: ${quizzes}">
+            <a th:href="@{/quizzes/__${quiz.id}__}" th:text="${quiz.getName()}"></a>
+        </div>
+
+        <div th:each="class: ${classes}">
+            <div th:text="${class.getName()}"></div>
+        </div>
+
+
+
     </div>
 
 

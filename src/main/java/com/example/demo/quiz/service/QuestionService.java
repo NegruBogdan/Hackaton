@@ -44,8 +44,8 @@ public class QuestionService {
         return questionAnswerRepository.getAnswersFromQuestion(questionRepository.getById(id));
     }
 
-    public Long getScore(Long id){
-        return questionRepository.getScore(id);
-    }
+//    public Long getScore(Long id){
+//        return questionRepository.getScore(id);
+//    }
 
 }

@@ -23,5 +23,10 @@ public class QuizSession {
     private Quiz quiz;
     @ManyToOne
     private Student student;
+
+    public QuizSession(Quiz quiz, Student student) {
+        this.quiz = quiz;
+        this.student = student;
+    }
 }
 
