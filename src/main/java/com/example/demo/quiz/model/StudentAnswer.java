@@ -1,14 +1,18 @@
 package com.example.demo.quiz.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Entity(name="studentsAnswers")
-public class Answer {
+@Setter
+@Entity(name="students_answers")
+public class StudentAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,9 +20,6 @@ public class Answer {
     private QuestionAnswer choice;
     @ManyToOne
     private Question question;
-
-
-
-
-
+    @ManyToOne
+    private QuizSession quizSession;
 }

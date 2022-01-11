@@ -1,13 +1,10 @@
 package com.example.demo.quiz.service;
 
-import com.example.demo.quiz.model.Answer;
 import com.example.demo.quiz.model.Question;
 import com.example.demo.quiz.model.QuestionAnswer;
 import com.example.demo.quiz.repository.QuestionAnswerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import static com.example.demo.quiz.repository.QuestionAnswerRepository.*;
 
 @Service
 @AllArgsConstructor

@@ -19,7 +19,7 @@ public class Question {
     private Quiz quiz;
     private String questionText;
     private int score;
-    @OneToMany
+    @Transient
     private Collection<QuestionAnswer> answers;
 
     public Question(Quiz quiz,String questionText,int score){

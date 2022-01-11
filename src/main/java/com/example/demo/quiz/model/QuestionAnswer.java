@@ -12,10 +12,8 @@ public class QuestionAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @ManyToOne
     private Question question;
-
     private String text;
     private boolean isTrue;
 
@@ -25,6 +23,4 @@ public class QuestionAnswer {
         this.text = answerText;
         this.isTrue = isTrue;
     }
-
-
 }

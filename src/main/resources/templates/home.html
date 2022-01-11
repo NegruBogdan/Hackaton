@@ -36,10 +36,26 @@
             <a th:href="@{/login}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Log in</a>
             &nbsp;
             <a th:href="@{/register}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sing up</a>
-
         </span>
+    </div>
 
-
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/quizzes/add}" method="post">
+            <div class="hidden">
+                <input type="number" name="authorId" sec:value="principal.id" id="author_id" class="hidden"/>
+            </div>&nbsp;
+            <div class="form-textbox">
+                <label for="quiz_name">Name</label>
+                <input type="text" name="name" id="quiz_name" />
+            </div>&nbsp;
+            <div class="form-textbox">
+                <label for="class_id">Class</label>
+                <input type="number" name="classId" id="class_id" />
+            </div>
+            <div class="form-textbox">
+                <input type="submit" id="submit" class="submit"/>
+            </div>
+        </form>
     </div>
 
 

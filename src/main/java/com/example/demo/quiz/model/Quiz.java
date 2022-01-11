@@ -24,15 +24,17 @@ public class Quiz {
     private String name;
     @ManyToMany
     private Collection<Student> studentsEnrolled;
+    private boolean published;
 
-    private String quizPassword;
+//    private String quizPassword;
 
 
     public Quiz(Teacher author, String name) {
         this.author = author;
         this.name = name;
         this.studentsEnrolled = null;
-        this.quizPassword = null;
+        this.published = false;
+//        this.quizPassword = null;
     }
 
     @Override
@@ -42,6 +44,7 @@ public class Quiz {
                     "id=" + id +
                     ", author=" + author +
                     ", name='" + name + '\'' +
+                    ", published='" + published + '\'' +
                     ", studentsEnrolled=" + studentsEnrolled +
                     '}';
         } else {
@@ -49,6 +52,7 @@ public class Quiz {
                     "id=" + id +
                     ", author=" + author +
                     ", name='" + name + '\'' +
+                    ", published='" + published + '\'' +
                     '}';
         }
     }

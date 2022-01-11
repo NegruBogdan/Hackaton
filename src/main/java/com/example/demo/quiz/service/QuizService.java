@@ -38,7 +38,7 @@ public class QuizService {
     public Collection<Question> getQuestionsFromQuiz(Long id) {
         return questionRepository.getQuestionFromQuiz(quizRepository.getById(id));
     }
-    public Quiz loginQuiz(String password,String name){
-        return quizRepository.QuizLogin(password,name);
-    }
+//    public Quiz loginQuiz(String password,String name){
+//        return quizRepository.QuizLogin(password,name);
+//    }
 }
