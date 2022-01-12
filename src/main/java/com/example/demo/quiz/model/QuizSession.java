@@ -2,10 +2,7 @@ package com.example.demo.quiz.model;
 
 import com.example.demo.appuser.model.Student;
 import com.example.demo.quiz.service.QuizService;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
@@ -15,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "quiz_sessions")
+@ToString
 public class QuizSession {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +21,13 @@ public class QuizSession {
     private Quiz quiz;
     @ManyToOne
     private Student student;
+    @Transient
+    private int score;
 
     public QuizSession(Quiz quiz, Student student) {
         this.quiz = quiz;
         this.student = student;
+        this.score = 0;
     }
 }
 

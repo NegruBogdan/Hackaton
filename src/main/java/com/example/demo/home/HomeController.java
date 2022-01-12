@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.home;
 
 import com.example.demo.appuser.model.AppUser;
 import com.example.demo.appuser.model.Class_;

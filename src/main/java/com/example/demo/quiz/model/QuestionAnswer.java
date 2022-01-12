@@ -2,12 +2,14 @@ package com.example.demo.quiz.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
 @Entity(name="answers")
+@ToString
 public class QuestionAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

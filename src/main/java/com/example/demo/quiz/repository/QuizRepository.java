@@ -18,10 +18,4 @@ public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
     @Query("SELECT q FROM quizzes q JOIN q.studentsEnrolled s WHERE s=?1")
     Collection<Quiz> getQuizzesByStudent(Student student);
-
-//    @Query(value ="SELECT q FROM  quizzes q where q.quizPassword=1? AND q.name=2?",
-//    nativeQuery = true)
-//    Quiz QuizLogin(String password,String name);
-
-
 }

@@ -25,8 +25,8 @@ public class Quiz {
     @ManyToMany
     private Collection<Student> studentsEnrolled;
     private boolean published;
-
-//    private String quizPassword;
+    @Transient
+    private Collection<Question> questions;
 
 
     public Quiz(Teacher author, String name) {
@@ -34,7 +34,7 @@ public class Quiz {
         this.name = name;
         this.studentsEnrolled = null;
         this.published = false;
-//        this.quizPassword = null;
+        this.questions = null;
     }
 
     @Override
@@ -56,6 +56,4 @@ public class Quiz {
                     '}';
         }
     }
-
-
 }

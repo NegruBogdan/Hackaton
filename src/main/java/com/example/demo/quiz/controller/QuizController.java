@@ -2,9 +2,7 @@ package com.example.demo.quiz.controller;
 
 import com.example.demo.appuser.model.Student;
 import com.example.demo.appuser.model.Teacher;
-import com.example.demo.quiz.model.Question;
-import com.example.demo.quiz.model.QuestionAnswer;
-import com.example.demo.quiz.model.Quiz;
+import com.example.demo.quiz.model.*;
 import com.example.demo.quiz.request.QuestionRequest;
 import com.example.demo.quiz.request.QuizRequest;
 import com.example.demo.quiz.request.StudentAnswerRequest;
@@ -12,13 +10,7 @@ import com.example.demo.quiz.service.QuestionAnswerService;
 import com.example.demo.quiz.service.QuestionService;
 import com.example.demo.quiz.service.QuizService;
 import com.example.demo.quiz.service.StudentAnswerService;
-import com.example.demo.security.QuestionAnswerSession;
-import com.example.demo.security.QuestionSession;
-import com.example.demo.quiz.model.QuizSession;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -28,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 //controler pentru quiz standard
 @RestController
@@ -39,21 +30,11 @@ public class QuizController {
     private final QuizService quizService;
     private final QuestionAnswerService questionAnswerService;
     private final StudentAnswerService studentAnswerService;
-    // private Long scor;
-
-//    @Autowired
-//    QuizSession quizSession;
-
-//    @Autowired
-//    QuestionAnswerSession questionAnswerSession;
-//
-//    @Autowired
-//    QuestionSession questionSession;
 
     @PostMapping(value="/add")
     public ModelAndView addQuiz(@ModelAttribute QuizRequest request) {// @ModelAttribute
         Quiz quiz = quizService.addQuiz(request);
-        return new ModelAndView("redirect:/quizzes/" + quiz.getId());
+        return new ModelAndView("redirect:/quizzes/" + quiz.getId() + "/edit");
     }
 
     @PostMapping(value="{quizId}/addQuestion")
@@ -79,13 +60,6 @@ public class QuizController {
         model.addAttribute("questions", questions);
         model.addAttribute("quiz", quiz);
         return new ModelAndView("quiz");
-//        try {
-//            return quizService.getQuizById(id).toString();
-//        } catch (EntityNotFoundException exception) {
-//            return "Quiz not found.";
-//        } catch (Exception exception) {
-//            return "Something wrong happened" + exception.toString();
-//        }
     }
 
     @GetMapping(value="{id}")
@@ -94,18 +68,16 @@ public class QuizController {
         Quiz quiz = quizService.getQuizById(id);
         if (auth.getPrincipal() instanceof Teacher) {
             model.addAttribute("role", "teacher");
+            Collection<QuizSession> quizSessions = quizService.getQuizSessionsByQuizId(id);
+            quizSessions.forEach(quizSession -> {
+                quizSession.setScore(quizService.calculateScore(quizSession));
+            });
+            model.addAttribute("quizSessions", quizSessions);
         } else {
             model.addAttribute("role", "student");
         }
         model.addAttribute("quiz", quiz);
         return new ModelAndView("view_quiz");
-//        try {
-//            return quizService.getQuizById(id).toString();
-//        } catch (EntityNotFoundException exception) {
-//            return "Quiz not found.";
-//        } catch (Exception exception) {
-//            return "Something wrong happened" + exception.toString();
-//        }
     }
 
     @PostMapping("{id}/attemptQuiz")
@@ -149,9 +121,9 @@ public class QuizController {
     @PostMapping(value="{quizSession_id}/question/{question_id}")
     public ModelAndView sendQuestionAnswer(@PathVariable long quizSession_id, @PathVariable long question_id,
                                            @ModelAttribute StudentAnswerRequest request, Model model) {
-        studentAnswerService.addStudentAnswer(request);
-        //TO DO
         QuizSession quizSession = quizService.getQuizSessionById(quizSession_id);
+        Question currentQuestion = questionService.getQuestionById(question_id);
+        studentAnswerService.addStudentAnswer(request, quizSession, currentQuestion);
         Quiz quiz = quizSession.getQuiz();
         Collection<Question> questions = quizService.getQuestionsFromQuiz(quiz.getId());
         ArrayList<Long> questionIds = new ArrayList<>();
@@ -167,9 +139,18 @@ public class QuizController {
     }
 
     @GetMapping(value="/session/{quizSession_id}")
-    public ModelAndView submitQuiz(@PathVariable long quizSession_id, Model model) {
+    public ModelAndView viewResults(@PathVariable long quizSession_id, Model model) {
         QuizSession quizSession = quizService.getQuizSessionById(quizSession_id);
+        Collection<Question> questions = quizService.getQuestionsFromQuiz(quizSession.getQuiz().getId());
+        questions.forEach(question -> {
+            Collection<QuestionAnswer> correctAnswers = questionService.getAnswersFromQuestion(question.getId());
+            question.setAnswers(correctAnswers);
+            Collection<StudentAnswer> studentAnswers = studentAnswerService.
+                    getAnswersFromQuestionFromQuizSession(quizSession, question);;
+            question.setStudentAnswers(studentAnswers);
+        });
         model.addAttribute("quizSession", quizSession);
+        model.addAttribute("questions", quizService.getQuestionsFromQuiz(quizSession.getQuiz().getId()));
         model.addAttribute("score", quizService.calculateScore(quizSession));
         return new ModelAndView("results");
     }
@@ -206,39 +187,5 @@ public class QuizController {
             return "Something wrong happened" + exception.toString();
         }
     }
-
-//    @GetMapping(value ="/startquiz")
-//    public ModelAndView StartQuiz(String givenPassword, String quizName){
-//        ModelAndView loginView = new ModelAndView("quiz.html");
-//
-//        Quiz quiz = quizService.loginQuiz(givenPassword,quizName);
-//        if (quiz==null){
-//            loginView.addObject("errQuizLogin", "Invalid Login Credentials");
-//
-//        }
-//        else
-//        {
-//            quizSession.setId(quiz.getId());
-//            return new ModelAndView("redirect:/quiz");
-//        }
-//        return loginView;
-//    }
-
-//    @PostMapping("/question/{id}")
-//    public void QuestionUse(@PathVariable long id,Long score,@RequestBody Long userAnswer){
-//        if(questionAnswerService.CheckAnswer(userAnswer))
-//            score = score+ questionService.getScore(userAnswer);
-//    }
-
-//    @GetMapping("/question/{id}")
-//    public Collection<QuestionAnswer> QuestionPage(@PathVariable long id, QuestionSession questionSession){
-//        return  questionService.getAnswersFromQuestion(questionSession.getId());
-//    }
-
-//    @GetMapping("/quiz/{id}")
-//    public Collection<Question> QuizInit(@PathVariable long id,QuizSession quizSession){
-//        return quizService.getQuestionsFromQuiz(quizSession.getId());
-//
-//    }
 
 }

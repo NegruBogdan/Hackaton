@@ -19,7 +19,30 @@
     <div th:text="${quizSession.quiz.name}"></div>
 
     <br/>
+    <div>Total Score: </div>
     <div th:text="${score}"></div>
+    <div th:each="question: ${questions}">
+        <div th:text="${question.getQuestionText()}"></div>
+        <div th:each="studentAnswer: ${question.getStudentAnswers()}" >
+            <div th:text="${studentAnswer.getAnswer().getText()}"></div>
+            <div>Your answer:</div>
+            <div th:if="${studentAnswer.isCorrect()}">
+                ✔
+            </div>
+            <div th:unless="${studentAnswer.isCorrect()}">
+                ❌
+            </div>
+
+            <div>Correct answer:</div>
+            <div th:if="${studentAnswer.getAnswer().isCorrect()}">
+                ✔
+            </div>
+            <div th:unless="${studentAnswer.getAnswer().isCorrect()}">
+                ❌
+            </div>
+        </div>
+        <br/>
+    </div>
 </div>
 
 <script src="../static/vendor/jquery/jquery.min.js"></script>

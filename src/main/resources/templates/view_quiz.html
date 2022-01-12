@@ -18,7 +18,12 @@
 <div class="main">
     <div th:text="${quiz.getName()}"></div>
     <div th:if="${role == 'teacher'}">
-        <span>You are a teacher</span>
+        <div th:each="quizSession: ${quizSessions}" >
+            <div>Student:</div>
+            <div th:text="${quizSession.getStudent().getFirstName()} + ${quizSession.getStudent().getLastName()}"></div>
+            <div>Score: </div>
+            <a th:href="@{/quizzes/session/__${quizSession.getId()}__}" th:text="${quizSession.getScore()}"></a>
+        </div>
     </div>
     <div th:unless="${role == 'teacher'}">
         <form  th:action="@{/quizzes/__${quiz.id}__/attemptQuiz}" method="post">

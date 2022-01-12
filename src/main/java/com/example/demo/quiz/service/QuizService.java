@@ -5,19 +5,16 @@ import com.example.demo.appuser.model.Teacher;
 import com.example.demo.appuser.service.ClassService;
 import com.example.demo.appuser.service.StudentService;
 import com.example.demo.appuser.service.TeacherService;
-import com.example.demo.quiz.model.Question;
-import com.example.demo.quiz.model.Quiz;
-import com.example.demo.quiz.model.QuizSession;
-import com.example.demo.quiz.model.StudentAnswer;
+import com.example.demo.quiz.model.*;
 import com.example.demo.quiz.repository.QuestionRepository;
 import com.example.demo.quiz.repository.QuizRepository;
 import com.example.demo.quiz.repository.QuizSessionRepository;
 import com.example.demo.quiz.request.QuizRequest;
-import com.example.demo.quiz.request.StudentAnswerRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +24,8 @@ public class QuizService {
     private final QuestionRepository questionRepository;
     private final TeacherService teacherService;
     private final StudentService studentService;
+    private final QuestionService questionService;
+    private final StudentAnswerService studentAnswerService;
     private final ClassService classService;
 
     public Quiz addQuiz(QuizRequest request) {
@@ -59,8 +58,31 @@ public class QuizService {
         return quizSessionRepository.getById(id);
     }
 
+    public Collection<QuizSession> getQuizSessionsByQuizId(Long id) {
+        return quizSessionRepository.getSessionsFromQuiz(quizRepository.getById(id));
+    }
+
     public int calculateScore(QuizSession quizSession) {
-        return 0;
+        Collection<Question> questions = getQuestionsFromQuiz(quizSession.getQuiz().getId());
+        int score = 0;
+        for(Iterator<Question> questionIterator = questions.iterator(); questionIterator.hasNext();) {
+            boolean answerIsCorrect = true;
+            Question question = questionIterator.next();
+            Collection<QuestionAnswer> correctAnswers = questionService.getAnswersFromQuestion(question.getId());
+            Collection<StudentAnswer> studentAnswers = studentAnswerService.
+                                                        getAnswersFromQuestionFromQuizSession(quizSession, question);
+            Iterator<QuestionAnswer> correctAnswersIterator = correctAnswers.iterator();
+            Iterator<StudentAnswer> studentAnswersIterator = studentAnswers.iterator();
+            while (correctAnswersIterator.hasNext() && studentAnswersIterator.hasNext()) {
+                if (correctAnswersIterator.next().isCorrect() != studentAnswersIterator.next().isCorrect()) {
+                    answerIsCorrect = false;
+                }
+            }
+            if (answerIsCorrect) {
+                score += question.getScore();
+            }
+        }
+        return score;
     }
 
     public Collection<Question> getQuestionsFromQuiz(Long id) {
@@ -74,11 +96,4 @@ public class QuizService {
     public Collection<Quiz> getQuizzesByStudentId(Long studentId) {
         return quizRepository.getQuizzesByStudent(studentService.getStudentById(studentId));
     }
-
-
-
-
-//    public Quiz loginQuiz(String password,String name){
-//        return quizRepository.QuizLogin(password,name);
-//    }
 }

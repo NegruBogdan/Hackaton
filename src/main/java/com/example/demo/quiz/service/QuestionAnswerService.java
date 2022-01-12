@@ -16,16 +16,4 @@ public class QuestionAnswerService {
         answerRepository.save(answer);
         return answer;
     }
-
-    public boolean CheckAnswer(Long choice){
-        QuestionAnswer answer = answerRepository.getQuestionAnswerById(choice);
-        if (answer.isCorrect()) {
-            return true;
-
-        }
-        else{
-            return false;}
-    }
-
-
 }

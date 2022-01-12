@@ -36,16 +36,11 @@ public class QuestionService {
         return question;
     }
 
-    public Question getQuestionById(@PathVariable long id) {
+    public Question getQuestionById(long id) {
         return questionRepository.getById(id);
     }
 
     public Collection<QuestionAnswer> getAnswersFromQuestion(Long id) {
         return questionAnswerRepository.getAnswersFromQuestion(questionRepository.getById(id));
     }
-
-//    public Long getScore(Long id){
-//        return questionRepository.getScore(id);
-//    }
-
 }

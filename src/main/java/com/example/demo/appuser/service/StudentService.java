@@ -64,25 +64,6 @@ public class StudentService implements UserDetailsService {
         return "login";
     }
 
-//    public String loginStudent(Student student) {
-//        boolean userExists = studentRepository
-//                .findByEmail(student.getEmail())
-//                .isPresent();
-//        if (userExists) {
-//            return "login with success";
-//        }
-//
-//
-//        String encodedPassword = bCryptPasswordEncoder
-//                .encode(student.getPassword());
-//
-//        student.setPassword(encodedPassword);
-//
-//        studentRepository.save(student);
-//
-//        return "login with success";
-//    }
-
     public Student getStudentById(Long id) {
         return studentRepository.getById(id);
     }
