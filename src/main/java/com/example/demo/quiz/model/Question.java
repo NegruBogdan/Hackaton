@@ -47,4 +47,8 @@ public class Question {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public String getScoreToString() {
+        return " (" + this.score + " p)";
+    }
 }

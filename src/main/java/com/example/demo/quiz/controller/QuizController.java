@@ -149,9 +149,14 @@ public class QuizController {
                     getAnswersFromQuestionFromQuizSession(quizSession, question);;
             question.setStudentAnswers(studentAnswers);
         });
+        int totalScore = 0;
+        for(Question question : quizService.getQuestionsFromQuiz(quizSession.getQuiz().getId())) {
+            totalScore += question.getScore();
+        }
         model.addAttribute("quizSession", quizSession);
         model.addAttribute("questions", quizService.getQuestionsFromQuiz(quizSession.getQuiz().getId()));
         model.addAttribute("score", quizService.calculateScore(quizSession));
+        model.addAttribute("totalScore", " / " + totalScore);
         return new ModelAndView("results");
     }
 
