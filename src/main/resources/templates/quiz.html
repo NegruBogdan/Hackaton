@@ -1,30 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
 
-    <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{css/quiz.css}">
+    <link rel="stylesheet" href="../static/css/quiz.css">
 </head>
+
 <body>
 
 <div class="main">
-    <div th:text="${quiz.name}"></div>
-    <form th:action="@{/quizzes/__${quiz.id}__/addQuestion}" method="post">
-        <div class="form-textbox">
-            <label for="questionText">Question</label>
-            <input type="text" name="questionText" id="questionText"/>
-        </div>&nbsp;
-        <div class="form-textbox">
-            <label for="answer1">Answer 1</label>
-            <input type="text" name="answer1" id="answer1"/>
+    <div class="header">
+        <div class="usernav">
+            <div class="userinfo">
+                <img src="../static/img/quizhub/quizhub.png" alt="">
+            </div>
+
+            <div class="authbuttons">
+                    <span sec:authorize="isAuthenticated()" class="userdata">
+                        <!--p>Welcome [[${#request.userPrincipal.principal.email}]]</p-->
+                        <h2>
+                            Welcome, <span>Marian</span> <span sec:authentication="principal.email"></span>
+                        </h2>
+                        <p class="logout"><a th:href="@{/logout}">Logout</a></p>
+                    </span>
+
+                <span sec:authorize="!isAuthenticated()" class="w3-bar-item w3-right">
+                        <a th:href="@{/login}" class="login" role="button" aria-pressed="true">Log In</a>
+                        &nbsp;
+                        <a th:href="@{/register}" class="signup" role="button" aria-pressed="true">Sign Up</a>
+                    </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="quizinfo">
+            <h1 th:text="${quiz.name}">Nume quiz</h1>
+        </div>
+
+        <form th:action="@{/quizzes/__${quiz.id}__/addQuestion}" method="post">
+            <div id="question" class="form-textbox">
+                <label for="questionText">Intrebarea:</label>
+                <input class="text" type="text" name="questionText" id="questionText"/>
+            </div>
+
+            <div class="form-textbox">
+                <label for="answer1">Raspuns 1:</label>
+                <input class="text" type="text" name="answer1" id="answer1"/>
+            </div>
             <div class="form-radio">
                 <input type="radio" name="isAnswer1Correct" value="true" id="newbie"/>
                 <label for="newbie">Correct</label>
@@ -32,11 +60,11 @@
                 <input type="radio" name="isAnswer1Correct" value="false" id="average" checked="checked"/>
                 <label for="average">Incorrect</label>
             </div>
-        </div>&nbsp;
 
-        <div class="form-textbox">
-            <label for="answer2">Answer 2</label>
-            <input type="text" name="answer2" id="answer2"/>
+            <div class="form-textbox">
+                <label for="answer2">Answer 2:</label>
+                <input class="text" type="text" name="answer2" id="answer2"/>
+            </div>
             <div class="form-radio">
                 <input type="radio" name="isAnswer2Correct" value="true" id="newbie2"/>
                 <label for="newbie2">Correct</label>
@@ -44,11 +72,12 @@
                 <input type="radio" name="isAnswer2Correct" value="false" id="average2" checked="checked"/>
                 <label for="average2">Incorrect</label>
             </div>
-        </div>&nbsp;
 
-        <div class="form-textbox">
-            <label for="answer3">Answer 3</label>
-            <input type="text" name="answer3" id="answer3"/>
+
+            <div class="form-textbox">
+                <label for="answer3">Answer 3:</label>
+                <input class="text" type="text" name="answer3" id="answer3"/>
+            </div>
             <div class="form-radio">
                 <input type="radio" name="isAnswer3Correct" value="true" id="newbie3"/>
                 <label for="newbie3">Correct</label>
@@ -56,11 +85,11 @@
                 <input type="radio" name="isAnswer3Correct" value="false" id="average3" checked="checked"/>
                 <label for="average3">Incorrect</label>
             </div>
-        </div>&nbsp;
 
-        <div class="form-textbox">
-            <label for="answer4">Answer 4</label>
-            <input type="text" name="answer4" id="answer4"/>
+            <div class="form-textbox">
+                <label for="answer4">Answer 4</label>
+                <input class="text" type="text" name="answer4" id="answer4"/>
+            </div>
             <div class="form-radio">
                 <input type="radio" name="isAnswer4Correct" value="true" id="newbie4"/>
                 <label for="newbie4">Correct</label>
@@ -68,33 +97,79 @@
                 <input type="radio" name="isAnswer4Correct" value="false" id="average4" checked="checked"/>
                 <label for="average4">Incorrect</label>
             </div>
-        </div>&nbsp;
 
-        <div class="form-textbox">
-            <label for="score">Score</label>
-            <input type="number" name="score" id="score" />
-        </div>
-        <div class="form-textbox">
-            <input type="submit" id="submit_question" value="Add Question">
-        </div>
-    </form>
-    <form  th:action="@{/quizzes/__${quiz.id}__/publishQuiz}" method="post">
-        <div class="form-textbox">
-            <input type="submit" id="submit_quiz" value="Publish Quiz">
-        </div>
-    </form>
-    <br/>
-    <div>Questions:</div>
-    <br/>
-    <div th:each="question: ${questions}">
-        <div th:text="${question.getQuestionText()}"></div>
-        <div th:each="answer: ${question.answers}">
-            <div th:text="${answer.text}"></div>
+            <div class="form-textbox">
+                <label for="score">Score</label>
+                <input class="text"  type="number" name="score" id="score" />
+            </div>
+
+            <div class="form-textbox">
+                <input class="submit" type="submit" id="submit_question" value="Add Question">
+            </div>
+        </form>
+
+        <form  th:action="@{/quizzes/__${quiz.id}__/publishQuiz}" method="post">
+            <div class="form-textbox">
+                <input class="submit" type="submit" id="submit_quiz" value="Publish Quiz">
+            </div>
+        </form>
+
+        <div class="question">
+            <h2>Questions:</h2>
+            <div th:each="question: ${questions}">
+                <h2 th:text="${question.getQuestionText()}">
+                    <span class="intrebare">INTREBARE</span>
+                </h2>
+                <div class="answers" th:each="answer: ${question.answers}">
+                    <li th:text="${answer.text}">
+                        raspuns1
+                    </li>
+                    <li th:text="${answer.text}">
+                        raspuns1
+                    </li>
+                    <li th:text="${answer.text}">
+                        raspuns1
+                    </li>
+                </div>
+
+                <h2 th:text="${question.getQuestionText()}">
+                    <span class="intrebare">INTREBARE</span>
+                </h2>
+                <div class="answers" th:each="answer: ${question.answers}">
+                    <li th:text="${answer.text}">
+                        raspuns1
+                    </li>
+                    <li th:text="${answer.text}">
+                        raspuns1
+                    </li>
+                    <li th:text="${answer.text}">
+                        raspuns1
+                    </li>
+                </div>
+
+                <h2 th:text="${question.getQuestionText()}">
+                    <span class="intrebare">INTREBARE</span>
+                </h2>
+                <div class="answers" th:each="answer: ${question.answers}">
+                    <li th:text="${answer.text}">
+                        raspuns1
+                    </li>
+                    <li th:text="${answer.text}">
+                        raspuns1
+                    </li>
+                    <li th:text="${answer.text}">
+                        raspuns1
+                    </li>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
 
-<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{js/main.js}"></script>
 <script src="../static/js/main.js"></script>
 </body>
+
 </html>
