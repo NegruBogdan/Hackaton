@@ -1,51 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
 
-    <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" href="../static/css/results.css">
 </head>
+
 <body>
 
-<div class="main">
-    <div th:text="${quizSession.quiz.name}"></div>
+    <div class="main">
+        <div class="header">
+            <div class="usernav">
+                <div class="userinfo">
+                    <img src="../static/img/quizhub/quizhub.png" alt="">
+                </div>
 
-    <br/>
-    <div>Total Score: </div>
-    <div th:text="${score}"></div>
-    <div th:each="question: ${questions}">
-        <div th:text="${question.getQuestionText()}"></div>
-        <div th:each="studentAnswer: ${question.getStudentAnswers()}" >
-            <div th:text="${studentAnswer.getAnswer().getText()}"></div>
-            <div>Your answer:</div>
-            <div th:if="${studentAnswer.isCorrect()}">
-                ✔
-            </div>
-            <div th:unless="${studentAnswer.isCorrect()}">
-                ❌
-            </div>
+                <div class="authbuttons">
+                    <span sec:authorize="isAuthenticated()" class="userdata">
+                        <!--p>Welcome [[${#request.userPrincipal.principal.email}]]</p-->
+                        <h2>
+                            Welcome, <span>Marian</span> <span sec:authentication="principal.email"></span>
+                        </h2>
+                        <p class="logout"><a th:href="@{/logout}">Logout</a></p>
+                    </span>
 
-            <div>Correct answer:</div>
-            <div th:if="${studentAnswer.getAnswer().isCorrect()}">
-                ✔
-            </div>
-            <div th:unless="${studentAnswer.getAnswer().isCorrect()}">
-                ❌
+                    <span sec:authorize="!isAuthenticated()" class="w3-bar-item w3-right">
+                        <a th:href="@{/login}" class="login" role="button" aria-pressed="true">Log In</a>
+                        &nbsp;
+                        <a th:href="@{/register}" class="signup" role="button" aria-pressed="true">Sign Up</a>
+                    </span>
+                </div>
             </div>
         </div>
-        <br/>
-    </div>
-</div>
 
-<script src="../static/vendor/jquery/jquery.min.js"></script>
-<script src="../static/js/main.js"></script>
+        <div class="main-content">
+            <div class="quizinfo">
+                <h1 th:text="${quizSession.quiz.name}">MOCKUP-QUIZ</h1>
+
+                <h2>Total Score: </h2>
+    
+                <h2 th:text="${score}">82</h2>
+            </div>
+
+            <div class="answers">
+                <div class="legend">
+                    <span>
+                        Your answer is marked with <span style="color: rgb(0, 255, 0);">✔</span> if you chose this answer 
+                    </span>
+                </div>
+
+                <div th:each="question: ${questions}">
+                    <span class="question" th:text="${question.getQuestionText()}">Intrebare0</span>
+
+                    <div th:each="studentAnswer: ${question.getStudentAnswers()}">
+                        <div class="answerDiv">
+                            <div class="questionAnswer wrong" th:text="${studentAnswer.getAnswer().getText()}">Answer1Answer1Answer1Answer1Answer1 ❌</div>
+                            <div class="questionAnswer correct" th:text="${studentAnswer.getAnswer().getText()}">Answer2 ✔</div>
+                            <div class="questionAnswer wrong" th:text="${studentAnswer.getAnswer().getText()}">Answer3 ❌</div>
+                            <div class="questionAnswer correct" th:text="${studentAnswer.getAnswer().getText()}">Answer4 ✔</div>
+                            <!-- <div class="youranswer">Your answer:</div>
+                            <div th:if="${studentAnswer.isCorrect()}">
+                                ✔
+                            </div>
+                            <div th:unless="${studentAnswer.isCorrect()}">
+                                ❌
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{js/main.js}"></script>
+    <script src="../static/js/main.js"></script>
 </body>
+
 </html>
