@@ -7,7 +7,7 @@
     /* IE9 Compat Modes */
     src: local("Poppins SemiBold"), local("Poppins-SemiBold"), url("../fonts/poppins/poppins-v5-latin-600.eot?#iefix") format("embedded-opentype"), url("../fonts/poppins/poppins-v5-latin-600.woff2") format("woff2"), url("../fonts/poppins/poppins-v5-latin-600.woff") format("woff"), url("../fonts/poppins/poppins-v5-latin-600.ttf") format("truetype"), url("../fonts/poppins/poppins-v5-latin-600.svg#Poppins") format("svg");
     /* Legacy iOS */
-}   
+}
 
 
 input,
@@ -76,7 +76,7 @@ h1 {
     font-size: 40px;
     text-align: center;
     cursor: default;
-    text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5), 0px 0px 2px rgba(206,89,55,0);
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5), 0px 0px 2px rgba(206, 89, 55, 0);
 }
 
 h2 {
@@ -89,7 +89,7 @@ h2 {
     font-size: 20px;
     text-align: center;
     cursor: default;
-    text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5), 0px 0px 2px rgba(206,89,55,0);
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5), 0px 0px 2px rgba(206, 89, 55, 0);
 }
 
 .clear {
@@ -365,10 +365,10 @@ input:-webkit-autofill {
     justify-content: space-between;
     align-items: center;
     align-content: space-around;
-    flex-direction: column;  
+    flex-direction: column;
     background-color: rgb(0, 99, 145);
-    -webkit-box-shadow: 0px 0px 15px 5px #000000; 
-box-shadow: 0px 0px 15px 5px #000000;
+    -webkit-box-shadow: 0px 0px 15px 5px #000000;
+    box-shadow: 0px 0px 15px 5px #000000;
 }
 
 .usernav {
@@ -402,9 +402,12 @@ box-shadow: 0px 0px 15px 5px #000000;
     padding: 30px;
     border-radius: 4px;
     border: 1px solid white;
+    box-shadow: 0 0 15px black;
 }
 
-.logout, .signup, .login{
+.logout,
+.signup,
+.login {
     background-color: #0076c0;
     cursor: pointer;
     width: fit-content;
@@ -415,11 +418,18 @@ box-shadow: 0px 0px 15px 5px #000000;
     border: 1px solid white;
 }
 
-.signup, .login {
-    padding: 5px 20px 5px 20px;
-    }
+.logout {
+    margin-left: 20px;
+}
 
-.logout:hover, .signup:hover, .login:hover {
+.signup,
+.login {
+    padding: 5px 20px 5px 20px;
+}
+
+.logout:hover,
+.signup:hover,
+.login:hover {
     transition: 0.4s;
     background-color: #005e99;
     box-shadow: 0 0 10px #67c5ff;
@@ -446,19 +456,20 @@ form {
     font-family: inherit;
     margin-bottom: 20px;
     border-radius: 4px;
-  }
-  
-  .custom-select select {
-    display: none; /*hide original SELECT element: */
-  }
-  
-  .select-selected {
+}
+
+.custom-select select {
+    display: none;
+    /*hide original SELECT element: */
+}
+
+.select-selected {
     background-color: rgb(255, 255, 255);
     border-radius: 4px;
-  }
-  
-  /* Style the arrow inside the select element: */
-  .select-selected:after {
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
     position: absolute;
     content: "";
     top: 14px;
@@ -467,38 +478,61 @@ form {
     height: 0;
     border: 6px solid transparent;
     border-color: #fff transparent transparent transparent;
-  }
-  
-  /* Point the arrow upwards when the select box is open (active): */
-  .select-selected.select-arrow-active:after {
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
     border-color: transparent transparent #fff transparent;
     top: 7px;
-  }
-  
-  /* style the items (options), including the selected item: */
-  .select-items div,.select-selected {
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
     color: #888;
     padding: 8px 16px;
     border: 1px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
     cursor: pointer;
-  }
-  
-  /* Style items (options): */
-  .select-items {
+}
+
+/* Style items (options): */
+.select-items {
     position: absolute;
     background-color: rgb(255, 255, 255);
     top: 100%;
     left: 0;
     right: 0;
     z-index: 99;
-  }
-  
-  /* Hide the items when the select box is closed: */
-  .select-hide {
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
     display: none;
-  }
-  
-  .select-items div:hover, .same-as-selected {
+}
+
+.select-items div:hover,
+.same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
-  }
+}
+
+.userdata {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    object-fit: contain;
+    width: 200px;
+    height: 100px;
+    margin-right: 30px;
+    border-right: 1px solid rgba(255, 255, 255, 0.507);
+    padding-right: 15px;
+}
+
+.userinfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
