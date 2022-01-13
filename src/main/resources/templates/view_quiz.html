@@ -1,52 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
 
-    <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" href="../static/css/view_quiz.css">
 </head>
+
 <body>
 
 <div class="main">
-    <div th:text="${quiz.getName()}"></div>
-    <div th:if="${role == 'teacher'}">
-        <div th:each="quizSession: ${quizSessions}" >
-            <span>Student:</span>
-            <span th:text="${quizSession.getStudent().getFullName()}"></span>
-            <br/>
-            <span>Score: </span>
-            <span>
-                <a th:href="@{/quizzes/session/__${quizSession.getId()}__}" th:text="${quizSession.getScore()}"></a>
-            </span>
-            <hr>
+    <div class="header">
+        <div class="usernav">
+            <div class="userinfo">
+                <img src="../static/img/quizhub/quizhub.png" alt="">
+            </div>
+
+            <div class="authbuttons">
+                    <span sec:authorize="isAuthenticated()" class="userdata">
+                        <!--p>Welcome [[${#request.userPrincipal.principal.email}]]</p-->
+                        <h2>
+                            Welcome, <span>Marian</span> <span sec:authentication="principal.email"></span>
+                        </h2>
+                        <p class="logout"><a th:href="@{/logout}">Logout</a></p>
+                    </span>
+
+                <span sec:authorize="!isAuthenticated()" class="w3-bar-item w3-right">
+                        <a th:href="@{/login}" class="login" role="button" aria-pressed="true">Log In</a>
+                        &nbsp;
+                        <a th:href="@{/register}" class="signup" role="button" aria-pressed="true">Sign Up</a>
+                    </span>
+            </div>
         </div>
     </div>
-    <div th:unless="${role == 'teacher'}">
-        <form  th:action="@{/quizzes/__${quiz.id}__/attemptQuiz}" method="post">
-            <div class="form-textbox">
-                <input type="submit" id="submit_quiz" value="Attempt Quiz">
+
+    <div class="main-content">
+        <div th:text="${quiz.getName()}"></div>
+
+        <div th:if="${role == 'teacher'}">
+            <div th:each="quizSession: ${quizSessions}" >
+                <h2><span class="question">Student:</span></h2>
+                <h3><span th:text="${quizSession.getStudent().getFullName()}"></span></h3>
+                <h2><span class="question">Score:</span></h2>
+                <h3><span><a th:href="@{/quizzes/session/__${quizSession.getId()}__}" th:text="${quizSession.getScore()}"></a>
+                </span></h3>
             </div>
-        </form>
-        <div th:if="${quizSessions.size() > 0}">Past sessions:</div>
-        <div th:if="${quizSessions.size() > 0}" th:each="quizSession: ${quizSessions}">
-            <span>Score: </span>
-            <span>
-                <a th:href="@{/quizzes/session/__${quizSession.getId()}__}" th:text="${quizSession.getScore()}"></a>
-            </span>
-            <hr>
+        </div>
+
+        <div th:unless="${role == 'teacher'}">
+            <form th:action="@{/quizzes/__${quiz.id}__/attemptQuiz}" method="post">
+                <div class="form-textbox">
+                    <input class="submit" type="submit" id="submit_quiz" value="Attempt Quiz">
+                </div>
+            </form>
+            <h2 th:if="${quizSessions.size() > 0}"><span class="question">Past sessions</span></h2>
+
+            <h2 th:if="${quizSessions.size() > 0}" th:each="quizSession: ${quizSessions}">
+                <span class="question">Score:
+                </span>
+
+                <div class="submit">
+                    <a th:href="@{/quizzes/session/__${quizSession.getId()}__}" th:text="${quizSession.getScore()}"></a>
+                </div>
+            </h2>
         </div>
     </div>
 </div>
+</div>
+</div>
 
-<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{js/main.js}"></script>
 <script src="../static/js/main.js"></script>
 </body>
+
 </html>
