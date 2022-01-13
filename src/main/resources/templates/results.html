@@ -56,7 +56,7 @@
             <div class="answers">
                 <div class="legend">
                     <span>
-                        The answer is marked with <span style="color: rgb(0, 255, 0);">✔</span> if it was selected as correct.
+                        The correct answer(s) is(/are) marked with <span style="color: rgb(0, 255, 0);">✔</span>.
                     </span>
                 </div>
 
@@ -66,12 +66,12 @@
                             <div th:if="${studentAnswer.isCorrect() == studentAnswer.getAnswer().isCorrect()}"
                                  class="questionAnswer correct" >
                                 <span th:text="${studentAnswer.getAnswer().getText()}">Answer</span>
-                                <span th:if="${studentAnswer.isCorrect()}"> ✔ </span>
+                                <span th:if="${studentAnswer.getAnswer().isCorrect()}"> ✔ </span>
                             </div>
                             <div th:unless="${studentAnswer.isCorrect() == studentAnswer.getAnswer().isCorrect()}"
                                  class="questionAnswer wrong">
                                 <span th:text="${studentAnswer.getAnswer().getText()}">Answer</span>
-                                <span th:if="${studentAnswer.isCorrect()}"> ✔ </span>
+                                <span th:if="${studentAnswer.getAnswer().isCorrect()}"> ✔ </span>
                             </div>
                         </div>
                 </div>

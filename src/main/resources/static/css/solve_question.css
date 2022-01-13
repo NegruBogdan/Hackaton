@@ -164,7 +164,7 @@ body {
 
 .form-radio input+label {
     margin: 0 8px;
-    padding: 11px 31px;
+    padding: 11px 15px;
     box-sizing: border-box;
     position: relative;
     display: inline-block;
@@ -549,7 +549,7 @@ img {
 .answers {
     display: flex;
     /* width: 100%; */
-    margin-top: 40px;
+    margin-top: 1%;
     flex-direction: column;
     align-content: flex-start;
     justify-content: center;
@@ -801,6 +801,8 @@ input {
     position: relative;
     margin: 0px 30px 10px 30px;
     justify-content: center;
+    /*display: inline-block;*/
+    vertical-align: middle;
 }
 
 .form-textbox label {
@@ -1184,7 +1186,7 @@ img {
     margin: 0 30px 60px 30px;
 }
 
-.form-radio label {
+.variante label {
     cursor: pointer;
 }
 li {
@@ -1204,9 +1206,26 @@ label {
 }
 
 .answer {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.submit a {
+    text-decoration: none;
+    color: white;
+}
+
+.answer>label {
+    margin-bottom: 3%;
+}
+
+.submit-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }

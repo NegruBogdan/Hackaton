@@ -146,7 +146,7 @@ public class QuizController {
             Collection<QuestionAnswer> correctAnswers = questionService.getAnswersFromQuestion(question.getId());
             question.setAnswers(correctAnswers);
             Collection<StudentAnswer> studentAnswers = studentAnswerService.
-                    getAnswersFromQuestionFromQuizSession(quizSession, question);;
+                    getAnswersFromQuestionFromQuizSession(quizSession, question);
             question.setStudentAnswers(studentAnswers);
         });
         int totalScore = 0;
