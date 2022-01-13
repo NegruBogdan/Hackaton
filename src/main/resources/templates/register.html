@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sign Up</title>
 
-    <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{css/style.css}">
+    <!-- <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" th:href="@{css/register.css}">
+    <link rel="stylesheet" href="../static/css/register.css">
 </head>
 <body>
 
@@ -18,7 +19,8 @@
     <div class="container">
         <div class="sign-up-content">
             <form th:action="@{/register}" th:object="${user}" method="post" class="signup-form" >
-                <h2 class="form-title">SIGN UP</h2>
+                <h1 class="form-title">SIGN UP</h1>
+
                 <div class="form-radio">
                     <input type="radio" th:field="*{appUserRole}" value="STUDENT" id="newbie" checked="checked"/>
                     <label for="newbie">Student</label>
@@ -29,26 +31,34 @@
 
                 <div class="form-textbox">
                     <label for="name">Name</label>
-                    <input type="text" th:field="*{firstName}" id="name" />
+                    <input class="text" type="text" th:field="*{firstName}" id="name" />
                 </div>
+
                 &nbsp;
+
                 <div class="form-textbox">
                     <label for="surname">Surname</label>
-                    <input type="text" th:field="*{lastName}" id="surname" />
+                    <input class="text" type="text" th:field="*{lastName}" id="surname" />
                 </div>
+
                 &nbsp;
+
                 <div class="form-textbox">
                     <label for="email">Email</label>
-                    <input type="email" th:field="*{email}" id="email" />
+                    <input class="text" type="email" th:field="*{email}" id="email" />
                 </div>
+
                 &nbsp;
+
                 <div class="form-textbox">
                     <label for="pass">Password</label>
-                    <input type="password" th:field="*{password}" id="pass" />
+                    <input class="text" type="password" th:field="*{password}" id="pass" />
                 </div>
+
                 &nbsp;
+
                 <div class="form-textbox">
-                    <input type="submit" id="submit" class="submit"></input>
+                    <input value="SIGN-UP" type="submit" id="submit" class="submit" />
                 </div>
             </form>
 
@@ -60,7 +70,7 @@
 
 </div>
 
-<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="../static/js/main.js"></script>
 </body>
 </html>

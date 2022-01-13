@@ -1,80 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
 
-    <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{css/style.css}">
+    <!-- <link rel="stylesheet" href="../static/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" th:href="@{css/home.css}">
+    <link rel="stylesheet" href="../static/css/home.css">
 </head>
+
 <body>
 
-<div class="main">
+    <div class="main">
+        <div class="header">
+            <div class="usernav">
+                <div class="userinfo">
+                    <span sec:authorize="isAuthenticated()" class="w3-bar-item w3-right">
+                        <!--p>Welcome [[${#request.userPrincipal.principal.email}]]</p-->
+                        <h2>
+                            Welcome, <span>Marian</span> <span sec:authentication="principal.email"></span>
+                        </h2>
+                        <p class="logout"><a th:href="@{/logout}">Logout</a></p>
+                    </span>
+                </div>
 
-    <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
-        <span class="w3-bar-item w3-left">
-            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-            <a href="createquiz.html" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Create new quiz</a>
-            <a href="joinquiz.html" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Join a quiz</a>
-        </span>
-        <span sec:authorize="isAuthenticated()" class="w3-bar-item w3-right">
-            <!--p>Welcome [[${#request.userPrincipal.principal.email}]]</p-->
-            <p>
-                Welcome <span sec:authentication="principal.email"></span>
-            </p>
-            <p ><a th:href="@{/logout}">Logout</a></p>
+                <div class="authbuttons">
+                    <span sec:authorize="!isAuthenticated()" class="w3-bar-item w3-right">
+                        <a th:href="@{/login}" class="login" role="button"
+                            aria-pressed="true">Log In</a>
+                        &nbsp;
+                        <a th:href="@{/register}" class="signup" role="button"
+                            aria-pressed="true">Sign Up</a>
+                    </span>
+                </div>
+            </div>
+        </div>
 
-        </span>
+        <div class="content" sec:authorize="isAuthenticated()">
+            <div class="main-content">
+                <form th:if="${role == 'teacher'}" th:action="@{/quizzes/add}" method="post">
+                    <input type="hidden" name="authorId" th:value="${user.getId()}" id="author_id" class="hidden" />
 
-        <span sec:authorize="!isAuthenticated()" class="w3-bar-item w3-right">
-            <a th:href="@{/login}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Log in</a>
-            &nbsp;
-            <a th:href="@{/register}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sing up</a>
-        </span>
-    </div>
-
-    <div sec:authorize="isAuthenticated()">
-        <form th:if="${role == 'teacher'}" th:action="@{/quizzes/add}" method="post">
-            <input type="hidden" name="authorId" th:value="${user.getId()}" id="author_id" class="hidden"/>
-            <div class="form-textbox">
-                <label for="quiz_name">Name</label>
-                <input type="text" name="name" id="quiz_name" />
-            </div>&nbsp;
-            <div class="form-textbox">
-                <label for="class_id">Class</label>
-                <select name="classId"  id="class_id">
-                    <div th:each="class: ${classes}">
-                        <option th:value="${class.getId()}" th:text="${class.getName()}"></option>
+                    <div class="form-textbox">
+                        <label for="quiz_name">Name</label>
+                        <input class="text" type="text" name="name" id="quiz_name" />
                     </div>
-                </select>
+
+                    <div class="custom-select">
+                        <select name="classId" id="class_id">
+                            <div th:each="class: ${classes}">
+                                <option value="selected" selected>CLASS</option>
+                                <option th:value="${class.getId()}" th:text="${class.getName()}"></option>
+                                <option value="1">TEST</option>
+                                <option value="2">ALT TEST</option>
+                                <option value="">INCA UN TEST</option>
+                                <option value="">IAR TEST</option>
+                                <option value="">SI FINAL</option>
+                            </div>
+                        </select>
+                    </div>
+
+                    <div class="form-textbox">
+                        <input type="submit" id="submit" class="submit" />
+                    </div>
+                </form>
+
+                <div><h2>Your quizzes: </h2></div>
+
+                <div th:each="quiz: ${quizzes}">
+                    <a th:href="@{/quizzes/__${quiz.id}__}" th:text="${quiz.getName()}"></a>
+                </div>
+
+                <div th:each="class: ${classes}">
+                    <div th:text="${class.getName()}"></div>
+                </div>
             </div>
-            <div class="form-textbox">
-                <input type="submit" id="submit" class="submit"/>
-            </div>
-        </form>
-        <div>Your quizzes: </div>
-        <div th:each="quiz: ${quizzes}">
-            <a th:href="@{/quizzes/__${quiz.id}__}" th:text="${quiz.getName()}"></a>
         </div>
-
-        <div th:each="class: ${classes}">
-            <div th:text="${class.getName()}"></div>
-        </div>
-
-
-
     </div>
 
-
-</div>
-
-<script src="../static/vendor/jquery/jquery.min.js"></script>
-<script src="../static/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../static/js/main.js"></script>
 </body>
+
 </html>
