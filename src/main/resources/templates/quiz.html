@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
 
-    <link rel="stylesheet" th:href="@{css/quiz.css}">
+    <link rel="stylesheet" th:href="@{/css/quiz.css}">
     <link rel="stylesheet" href="../static/css/quiz.css">
 </head>
 
@@ -40,17 +40,18 @@
 
     <div class="main-content">
         <div class="quizinfo">
-            <h1 th:text="${quiz.name}">Nume quiz</h1>
+            <h1 th:text="${quiz.name}">Quiz Name</h1>
+            <h2>Add a new Question</h2>
         </div>
 
         <form th:action="@{/quizzes/__${quiz.id}__/addQuestion}" method="post">
             <div id="question" class="form-textbox">
-                <label for="questionText">Intrebarea:</label>
+                <label for="questionText">Question</label>
                 <input class="text" type="text" name="questionText" id="questionText"/>
             </div>
 
             <div class="form-textbox">
-                <label for="answer1">Raspuns 1:</label>
+                <label for="answer1">Answer 1</label>
                 <input class="text" type="text" name="answer1" id="answer1"/>
             </div>
             <div class="form-radio">
@@ -58,11 +59,11 @@
                 <label for="newbie">Correct</label>
 
                 <input type="radio" name="isAnswer1Correct" value="false" id="average" checked="checked"/>
-                <label for="average">Incorrect</label>
+                <label for="average">Wrong</label>
             </div>
 
             <div class="form-textbox">
-                <label for="answer2">Answer 2:</label>
+                <label for="answer2">Answer 2</label>
                 <input class="text" type="text" name="answer2" id="answer2"/>
             </div>
             <div class="form-radio">
@@ -70,12 +71,12 @@
                 <label for="newbie2">Correct</label>
 
                 <input type="radio" name="isAnswer2Correct" value="false" id="average2" checked="checked"/>
-                <label for="average2">Incorrect</label>
+                <label for="average2">Wrong</label>
             </div>
 
 
             <div class="form-textbox">
-                <label for="answer3">Answer 3:</label>
+                <label for="answer3">Answer 3</label>
                 <input class="text" type="text" name="answer3" id="answer3"/>
             </div>
             <div class="form-radio">
@@ -83,7 +84,7 @@
                 <label for="newbie3">Correct</label>
 
                 <input type="radio" name="isAnswer3Correct" value="false" id="average3" checked="checked"/>
-                <label for="average3">Incorrect</label>
+                <label for="average3">Wrong</label>
             </div>
 
             <div class="form-textbox">
@@ -95,12 +96,12 @@
                 <label for="newbie4">Correct</label>
 
                 <input type="radio" name="isAnswer4Correct" value="false" id="average4" checked="checked"/>
-                <label for="average4">Incorrect</label>
+                <label for="average4">Wrong</label>
             </div>
 
             <div class="form-textbox">
                 <label for="score">Score</label>
-                <input class="text"  type="number" name="score" id="score" />
+                <input class="text" type="number" name="score" id="score" />
             </div>
 
             <div class="form-textbox">
@@ -120,55 +121,16 @@
                 <h2 th:text="${question.getQuestionText()}">
                     <span class="intrebare">INTREBARE</span>
                 </h2>
-                <div class="answers" th:each="answer: ${question.answers}">
-                    <li th:text="${answer.text}">
-                        raspuns1
-                    </li>
-                    <li th:text="${answer.text}">
-                        raspuns1
-                    </li>
-                    <li th:text="${answer.text}">
-                        raspuns1
-                    </li>
-                </div>
-
-                <h2 th:text="${question.getQuestionText()}">
-                    <span class="intrebare">INTREBARE</span>
-                </h2>
-                <div class="answers" th:each="answer: ${question.answers}">
-                    <li th:text="${answer.text}">
-                        raspuns1
-                    </li>
-                    <li th:text="${answer.text}">
-                        raspuns1
-                    </li>
-                    <li th:text="${answer.text}">
-                        raspuns1
-                    </li>
-                </div>
-
-                <h2 th:text="${question.getQuestionText()}">
-                    <span class="intrebare">INTREBARE</span>
-                </h2>
-                <div class="answers" th:each="answer: ${question.answers}">
-                    <li th:text="${answer.text}">
-                        raspuns1
-                    </li>
-                    <li th:text="${answer.text}">
-                        raspuns1
-                    </li>
-                    <li th:text="${answer.text}">
-                        raspuns1
-                    </li>
-                </div>
-
+                <ul class="answers" >
+                    <li th:each="answer: ${question.answers}" th:text="${answer.text}">Answer</li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
 <script src="../static/js/main.js"></script>
 </body>
 

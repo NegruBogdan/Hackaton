@@ -19,10 +19,14 @@
     <div th:text="${quiz.getName()}"></div>
     <div th:if="${role == 'teacher'}">
         <div th:each="quizSession: ${quizSessions}" >
-            <div>Student:</div>
-            <div th:text="${quizSession.getStudent().getFirstName()} + ${quizSession.getStudent().getLastName()}"></div>
-            <div>Score: </div>
-            <a th:href="@{/quizzes/session/__${quizSession.getId()}__}" th:text="${quizSession.getScore()}"></a>
+            <span>Student:</span>
+            <span th:text="${quizSession.getStudent().getFullName()}"></span>
+            <br/>
+            <span>Score: </span>
+            <span>
+                <a th:href="@{/quizzes/session/__${quizSession.getId()}__}" th:text="${quizSession.getScore()}"></a>
+            </span>
+            <hr>
         </div>
     </div>
     <div th:unless="${role == 'teacher'}">
@@ -31,6 +35,14 @@
                 <input type="submit" id="submit_quiz" value="Attempt Quiz">
             </div>
         </form>
+        <div th:if="${quizSessions.size() > 0}">Past sessions:</div>
+        <div th:if="${quizSessions.size() > 0}" th:each="quizSession: ${quizSessions}">
+            <span>Score: </span>
+            <span>
+                <a th:href="@{/quizzes/session/__${quizSession.getId()}__}" th:text="${quizSession.getScore()}"></a>
+            </span>
+            <hr>
+        </div>
     </div>
 </div>
 

@@ -66,13 +66,13 @@ public class QuizController {
     public ModelAndView viewQuizById(@PathVariable long id, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Quiz quiz = quizService.getQuizById(id);
+        Collection<QuizSession> quizSessions = quizService.getQuizSessionsByQuizId(id);
+        quizSessions.forEach(quizSession -> {
+            quizSession.setScore(quizService.calculateScore(quizSession));
+        });
+        model.addAttribute("quizSessions", quizSessions);
         if (auth.getPrincipal() instanceof Teacher) {
             model.addAttribute("role", "teacher");
-            Collection<QuizSession> quizSessions = quizService.getQuizSessionsByQuizId(id);
-            quizSessions.forEach(quizSession -> {
-                quizSession.setScore(quizService.calculateScore(quizSession));
-            });
-            model.addAttribute("quizSessions", quizSessions);
         } else {
             model.addAttribute("role", "student");
         }
