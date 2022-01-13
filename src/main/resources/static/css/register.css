@@ -292,7 +292,7 @@ input[type=checkbox]:not(old):checked+label>span:before {
 }
 
 .submit:hover {
-    background: #0076c0;
+    background: #127ec4;
     transition: 0.4s;
 }
 

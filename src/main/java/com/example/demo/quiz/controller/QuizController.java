@@ -153,6 +153,12 @@ public class QuizController {
         for(Question question : quizService.getQuestionsFromQuiz(quizSession.getQuiz().getId())) {
             totalScore += question.getScore();
         }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getPrincipal() instanceof Teacher) {
+            model.addAttribute("role", "teacher");
+        } else {
+            model.addAttribute("role", "student");
+        }
         model.addAttribute("quizSession", quizSession);
         model.addAttribute("questions", quizService.getQuestionsFromQuiz(quizSession.getQuiz().getId()));
         model.addAttribute("score", quizService.calculateScore(quizSession));

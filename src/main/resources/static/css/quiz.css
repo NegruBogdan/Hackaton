@@ -288,7 +288,7 @@ input[type=checkbox]:not(old):checked+label>span:before {
 
 .submit {
     display: block;
-    background-color: #00578d;
+    background-color: #127ec4;
     color: #FFF;
     border: none;
     font-size: 20px;
@@ -306,7 +306,7 @@ input[type=checkbox]:not(old):checked+label>span:before {
 }
 
 .submit:hover {
-    background-color: #006caf;
+    background-color: #0366A6;
     transition: 0.4s;
     box-shadow: 0 0 10px rgb(0, 157, 255);
 }
@@ -367,7 +367,7 @@ input:-webkit-autofill {
     align-items: center;
     align-content: space-around;
     flex-direction: column;
-    background-color: rgb(0, 99, 145);
+    background-color: #008ee6;
     -webkit-box-shadow: 0px 0px 15px 5px #000000;
     box-shadow: 0px 0px 15px 5px #000000;
 }
@@ -391,7 +391,7 @@ input:-webkit-autofill {
 }
 
 .main-content {
-    background-color: rgb(0, 80, 117);
+    background-color: #0095F2;
     width: 35%;
     height: fit-content;
     display: flex;
@@ -410,7 +410,7 @@ input:-webkit-autofill {
 .logout,
 .signup,
 .login {
-    background-color: #0076c0;
+    background-color: #127ec4;
     cursor: pointer;
     width: fit-content;
     margin-bottom: 10px;
@@ -424,6 +424,16 @@ input:-webkit-autofill {
     margin-left: 20px;
 }
 
+.logout a {
+    text-decoration: none;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
 .signup,
 .login {
     padding: 5px 20px 5px 20px;
@@ -433,7 +443,7 @@ input:-webkit-autofill {
 .signup:hover,
 .login:hover {
     transition: 0.4s;
-    background-color: #005e99;
+    background-color: #0366A6;
     box-shadow: 0 0 10px #67c5ff;
 }
 
@@ -530,7 +540,7 @@ img {
     width: 200px;
     height: 100px;
     margin-right: 30px;
-    border-right: 1px solid rgba(255, 255, 255, 0.507);
+    /*border-right: 1px solid rgba(255, 255, 255, 0.507);*/
     padding-right: 15px;
 }
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>quizHub - Home</title>
 
     <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
     <link rel="stylesheet" th:href="@{css/home.css}">
@@ -24,9 +24,9 @@
                 <div class="authbuttons">
                     <span sec:authorize="isAuthenticated()" class="userdata">
                         <!--p>Welcome [[${#request.userPrincipal.principal.email}]]</p-->
-                        <h2>
-                            Welcome, <span>Marian</span> <span sec:authentication="principal.email"></span>
-                        </h2>
+                        <h3 style="color: white">
+                            Logged in as <span sec:authentication="principal.username"></span>
+                        </h3>
                         <p class="logout"><a th:href="@{/logout}">Logout</a></p>
                     </span>
 
@@ -41,7 +41,7 @@
 
         <div class="content" sec:authorize="isAuthenticated()">
             <div class="main-content">
-                <h1>Create a new Quiz</h1>
+                <h1 th:if="${role == 'teacher'}">Create a new Quiz</h1>
                 <form th:if="${role == 'teacher'}" th:action="@{/quizzes/add}" method="post">
                     <input type="hidden" name="authorId" th:value="${user.getId()}" id="author_id" class="hidden" />
 
@@ -69,6 +69,14 @@
                         <a th:href="@{/quizzes/__${quiz.id}__}" th:text="${quiz.getName()}"></a>
                     </div>
                 </div>
+
+
+                <div th:if="${role != 'teacher'}" th:unless="${quizzes.size() > 0}" class="your-quizzes">
+                    <h2> You have no active quizzes. 🥳 </h2>
+
+                </div>
+
+
 
 
 <!--                <div th:each="class: ${classes}">-->
