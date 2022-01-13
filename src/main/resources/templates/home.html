@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
 
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
     <link rel="stylesheet" th:href="@{css/home.css}">
-    <link rel="stylesheet" href="../static/css/home.css">
+<!--    <link rel="stylesheet" href="../static/css/home.css">-->
 </head>
 
 <body>
@@ -17,7 +18,7 @@
         <div class="header">
             <div class="usernav">
                 <div class="userinfo">
-                    <img src="../static/img/quizhub/quizhub.png" alt="">
+                    <a href="/"><img th:src="@{/img/quizhub/quizhub.png}" alt="Go Home"></a>
                 </div>
 
                 <div class="authbuttons">
@@ -30,11 +31,9 @@
                     </span>
 
                     <span sec:authorize="!isAuthenticated()" class="w3-bar-item w3-right">
-                        <a th:href="@{/login}" class="login" role="button"
-                            aria-pressed="true">Log In</a>
+                        <a th:href="@{/login}" class="login" role="button" aria-pressed="true">Log In</a>
                         &nbsp;
-                        <a th:href="@{/register}" class="signup" role="button"
-                            aria-pressed="true">Sign Up</a>
+                        <a th:href="@{/register}" class="signup" role="button" aria-pressed="true">Sign Up</a>
                     </span>
                 </div>
             </div>
@@ -42,11 +41,12 @@
 
         <div class="content" sec:authorize="isAuthenticated()">
             <div class="main-content">
+                <h1>Create a new Quiz</h1>
                 <form th:if="${role == 'teacher'}" th:action="@{/quizzes/add}" method="post">
                     <input type="hidden" name="authorId" th:value="${user.getId()}" id="author_id" class="hidden" />
 
                     <div class="form-textbox">
-                        <label for="quiz_name">Name</label>
+                        <label for="quiz_name">Quiz Name</label>
                         <input class="text" type="text" name="name" id="quiz_name" />
                     </div>
 
@@ -58,19 +58,28 @@
                     </div>
 
                     <div class="form-textbox">
-                        <input type="submit" id="submit" class="submit" />
+                        <input type="submit" id="submit" class="submit" value="Create Quiz"/>
                     </div>
                 </form>
 
-                <div><h2>Your quizzes: </h2></div>
+                <div th:if="${quizzes.size() > 0}" class="your-quizzes">
+                    <h2 >Your quizzes: </h2>
 
-                <div th:each="quiz: ${quizzes}">
-                    <a th:href="@{/quizzes/__${quiz.id}__}" th:text="${quiz.getName()}"></a>
+                    <div th:each="quiz: ${quizzes}">
+                        <a th:href="@{/quizzes/__${quiz.id}__}" th:text="${quiz.getName()}"></a>
+                    </div>
                 </div>
 
-                <div th:each="class: ${classes}">
-                    <div th:text="${class.getName()}"></div>
-                </div>
+
+<!--                <div th:each="class: ${classes}">-->
+<!--                    <div th:text="${class.getName()}"></div>-->
+<!--                </div>-->
+            </div>
+            <div class="coming-soon">
+                <img th:src="@{/img/BattleRoyaleQuiz.jpg}" alt="Battle Royale Quiz">
+                <img th:src="@{/img/ClassicChampionshipQuiz.jpg}" alt="Classic Championship Quiz">
+                <img th:src="@{/img/ClassicChampionshipQuiz.jpg}" alt="Classic Championship Quiz">
+
             </div>
         </div>
     </div>

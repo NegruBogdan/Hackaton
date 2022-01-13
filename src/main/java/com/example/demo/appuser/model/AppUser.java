@@ -57,6 +57,10 @@ public abstract class AppUser implements UserDetails {
         return lastName;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

@@ -7,8 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
 
-    <link rel="stylesheet" th:href="@{css/style.css}">
-    <link rel="stylesheet" href="../static/css/results.css">
+<!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
+    <link rel="stylesheet" th:href="@{/css/results.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+    <script type="text/javascript" th:src="@{js/main.js}" defer></script>
+    <!--script src="../static/js/main.js"></script>
+    <link rel="stylesheet" href="../static/css/results.css"-->
 </head>
 
 <body>
@@ -17,7 +21,7 @@
         <div class="header">
             <div class="usernav">
                 <div class="userinfo">
-                    <img src="../static/img/quizhub/quizhub.png" alt="">
+                    <a href="/"><img th:src="@{/img/quizhub/quizhub.png}" alt="Go Home"></a>
                 </div>
 
                 <div class="authbuttons">
@@ -40,46 +44,41 @@
 
         <div class="main-content">
             <div class="quizinfo">
-                <h1 th:text="${quizSession.quiz.name}">MOCKUP-QUIZ</h1>
+                <h1 th:text="${quizSession.quiz.name}">QUIZ NAME</h1>
 
                 <h2>Total Score: </h2>
     
-                <h2 th:text="${score}">82</h2>
+                <h2 th:text="${score} + ${totalScore}">Score</h2>
+
+                <h3 th:text="${quizSession.getStudent().getFullName()}"> Student Name </h3>
             </div>
 
             <div class="answers">
                 <div class="legend">
                     <span>
-                        Your answer is marked with <span style="color: rgb(0, 255, 0);">✔</span> if you chose this answer 
+                        The answer is marked with <span style="color: rgb(0, 255, 0);">✔</span> if it was selected as correct.
                     </span>
                 </div>
 
                 <div th:each="question: ${questions}">
-                    <span class="question" th:text="${question.getQuestionText()}">Intrebare0</span>
-
-                    <div th:each="studentAnswer: ${question.getStudentAnswers()}">
-                        <div class="answerDiv">
-                            <div class="questionAnswer wrong" th:text="${studentAnswer.getAnswer().getText()}">Answer1Answer1Answer1Answer1Answer1 ❌</div>
-                            <div class="questionAnswer correct" th:text="${studentAnswer.getAnswer().getText()}">Answer2 ✔</div>
-                            <div class="questionAnswer wrong" th:text="${studentAnswer.getAnswer().getText()}">Answer3 ❌</div>
-                            <div class="questionAnswer correct" th:text="${studentAnswer.getAnswer().getText()}">Answer4 ✔</div>
-                            <!-- <div class="youranswer">Your answer:</div>
-                            <div th:if="${studentAnswer.isCorrect()}">
-                                ✔
+                    <span class="question" th:text="${question.getQuestionText()} + ${question.getScoreToString()}">Question text?</span>
+                        <div th:each="studentAnswer: ${question.getStudentAnswers()}" class="answerDiv">
+                            <div th:if="${studentAnswer.isCorrect() == studentAnswer.getAnswer().isCorrect()}"
+                                 class="questionAnswer correct" >
+                                <span th:text="${studentAnswer.getAnswer().getText()}">Answer</span>
+                                <span th:if="${studentAnswer.isCorrect()}"> ✔ </span>
                             </div>
-                            <div th:unless="${studentAnswer.isCorrect()}">
-                                ❌
-                            </div> -->
+                            <div th:unless="${studentAnswer.isCorrect() == studentAnswer.getAnswer().isCorrect()}"
+                                 class="questionAnswer wrong">
+                                <span th:text="${studentAnswer.getAnswer().getText()}">Answer</span>
+                                <span th:if="${studentAnswer.isCorrect()}"> ✔ </span>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{js/main.js}"></script>
-    <script src="../static/js/main.js"></script>
 </body>
 
 </html>
