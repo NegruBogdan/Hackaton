@@ -1,0 +1,103 @@
+Setup:
+- Register teacher (bogdan_negru)
+- Register student (elena_matei)
+- Create 4 classes (312, 313, 341, 342)
+- Enroll student to first class
+
+
+
+- Login teacher (bogdan_negru)
+- Create quiz
+
+Food and Drink Quiz
+
+What is the rarest M&M color?
+
+Green
+Blue
+Brown .
+Yellow
+
+Which country consumes the most chocolate per capita?
+
+Switzerland .
+Belgium
+USA
+China
+
+Which countries are in TOP 10 wine production by volume?
+
+France .
+Romania
+China
+Italy .
+
+
+- Publish Quiz
+- Create Quiz
+
+Geography Quiz
+
+Area 51 is located in which state?
+
+California
+Nevada  .
+South Dakota
+Texas
+
+- Create Quiz
+
+Sports Quiz
+
+Which countries have not missed one of the modern-day Olympics?
+
+Germany
+Greece .
+Romania
+Australia .
+
+- Logout
+
+- Login wrong username
+
+- Login Student (elena_matei)
+
+- Food and Drink Quiz
+
+- Attempt Quiz
+
+- Solve Quiz
+
+- Previous Question
+
+- Quiz Results
+
+- Past Sessions (Home -> Food and Drink Quiz)
+
+- La click pe "Score x" te duce pe pagina de rezultate
+
+- Geography Quiz (Home -> No past sessions)
+
+- Logout
+
+- Login profesor
+
+- Food and Drink Quiz
+
+- Past Sessions (Home -> Food and Drink Quiz)
+
+- La click pe "Score x" te duce pe pagina de rezultate
+
+- Sports Quiz (Home -> No past sessions)
+
+- Logout
+
+- Register student (theo_tudorache)
+
+- Login (-> No active quizzes)
+
+- Register teacher (vlaicu_paraschiv)
+
+- Login (-> Create quiz)
+
+- In viitor vrem sa adaugam inca 3 tipuri de quiz-uri: Battle Royale, Classic Championship si Team Quiz pe echipe
